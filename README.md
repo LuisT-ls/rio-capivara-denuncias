@@ -1,113 +1,138 @@
-# Rio Capivara Denúncias
+# Rio Capivara - Sistema de Denúncias Ambientais
 
-Aplicação web para denúncias ambientais no Rio Capivara (Camaçari-BA).
+![Rio Capivara](./assets/img/rio-capivara.svg)
 
-## 📋 Sobre o Projeto
+Um sistema web para denúncias ambientais relacionadas ao Rio Capivara em Camaçari-BA. Esta plataforma permite que cidadãos reportem problemas como desmatamento, despejo ilegal de resíduos e poluição, contribuindo para a preservação deste importante recurso natural.
 
-Esta aplicação permite o registro fotográfico e georreferenciado de situações de risco ambiental, como despejo ilegal e desmatamento na região do Rio Capivara em Camaçari, Bahia. O objetivo é promover o monitoramento ambiental e o engajamento da comunidade local na preservação deste importante ecossistema.
+## 📋 Funcionalidades
 
-## 🛠️ Tecnologias Utilizadas
+- **Mapa Interativo**: Visualização georreferenciada das denúncias
+- **Formulário de Denúncia**: Interface intuitiva para reportar problemas ambientais
+- **Suporte a Fotos**: Upload de evidências fotográficas
+- **Autenticação de Usuários**: Login com e-mail, Google ou Facebook
+- **Modo Escuro**: Interface adaptável para uso em ambientes com pouca luz
+- **Experiência Offline**: Funcionalidades básicas mesmo sem conexão (PWA)
+- **Design Responsivo**: Adaptação perfeita para dispositivos móveis e desktop
 
-### Frontend
-- HTML5, CSS3, JavaScript
-- Bootstrap, Google Fonts, Font Awesome
+## 🛠️ Tecnologias
 
-### Backend
-- Node.js com Express.js
-- Firebase (Banco de dados e autenticação)
-- Cloudinary (Armazenamento de imagens)
+- **HTML5**: Estrutura semântica para acessibilidade e SEO
+- **CSS3 Modular**: Sistema de estilos organizados por componentes
+- **JavaScript**: Interatividade e funcionalidades dinâmicas
+- **Bootstrap 5**: Framework CSS para responsividade
+- **Firebase**: Autenticação, armazenamento e banco de dados
+- **Google Maps API**: Visualização e interação com mapas
+- **PWA**: Recursos de Progressive Web App para experiência mobile aprimorada
+- **Font Awesome**: Biblioteca de ícones
 
-### Geolocalização e Mapas
-- Google Maps API
-- Geolocation API
+## 🧩 Estrutura do Projeto
 
-### Segurança
-- Firebase Auth
-- reCAPTCHA v3
+```
+.
+├── assets/
+│   ├── css/                   # Arquivos CSS
+│   │   ├── main.css           # CSS principal que importa os módulos
+│   │   └── modules/           # CSS modular organizado por funcionalidade
+│   └── img/                   # Imagens e recursos gráficos
+├── js/
+│   ├── main.js                # JavaScript principal
+│   └── modules/               # JS modular organizado por funcionalidade
+├── pages/                     # Páginas adicionais (termos, privacidade)
+├── index.html                 # Página principal
+├── manifest.json              # Configuração PWA
+└── sw.js                      # Service Worker para funcionalidades offline
+```
 
-### Hospedagem
-- Vercel (Frontend)
-- Railway/Render (Backend)
-- Google Analytics (Monitoramento)
+### Sistema CSS Modular
 
-## ⚙️ Funcionalidades Principais
+O projeto utiliza uma abordagem de CSS modular, dividindo os estilos em componentes reutilizáveis:
 
-1. **Registro de denúncias**
-   - Captura ou upload de fotos
-   - Geolocalização automática
-   - Campo para descrição do problema
+- **Base**: Estilos fundamentais (variáveis, reset, tipografia)
+- **Layout**: Estruturas de página (container, header, footer, hero)
+- **Componentes**: Elementos de UI reutilizáveis (botões, inputs, modais)
+- **Features**: Estilos específicos para funcionalidades (mapa, formulário)
+- **Utils**: Classes utilitárias (espaçamento, acessibilidade, responsividade)
 
-2. **Mapa interativo**
-   - Visualização de denúncias em tempo real
-   - Filtros por categoria de problema
-
-3. **Autenticação flexível**
-   - Opção para denúncias anônimas
-   - Cadastro para acompanhamento de denúncias
-
-4. **Painel administrativo**
-   - Moderação de conteúdo
-   - Estatísticas e relatórios
-
-5. **Sistema de notificações**
-   - Alertas para áreas de risco
-   - Atualizações sobre denúncias
-
-6. **Integração institucional**
-   - Geração de relatórios para órgãos ambientais e prefeitura
-
-## 🚀 Como Iniciar o Desenvolvimento
+## 🚀 Configuração e Instalação
 
 ### Pré-requisitos
-- Node.js (versão 16 ou superior)
-- npm ou yarn
-- Conta no Firebase
-- Conta no Cloudinary (para armazenamento de imagens)
-- Chave da API do Google Maps
 
-### Instalação
+- Navegador web moderno
+- Conta no Firebase (para autenticação e banco de dados)
+- Chave API do Google Maps
 
-1. Clone o repositório
+### Passos para instalação
+
+1. Clone o repositório:
+
    ```bash
-   git clone https://github.com/LuisT-ls/rio-capivara-denuncias
-   ```
-
-2. Instale as dependências
-   ```bash
+   git clone https://github.com/LuisT-ls/rio-capivara-denuncias.git
    cd rio-capivara-denuncias
-   npm install
    ```
 
-3. Configure as variáveis de ambiente (crie um arquivo .env na raiz do projeto)
-   ```
-   REACT_APP_FIREBASE_API_KEY=sua-chave
-   REACT_APP_FIREBASE_AUTH_DOMAIN=seu-dominio
-   REACT_APP_FIREBASE_PROJECT_ID=seu-projeto-id
-   REACT_APP_FIREBASE_STORAGE_BUCKET=seu-bucket
-   REACT_APP_FIREBASE_MESSAGING_SENDER_ID=seu-sender-id
-   REACT_APP_FIREBASE_APP_ID=seu-app-id
-   REACT_APP_GOOGLE_MAPS_API_KEY=sua-chave-google-maps
-   REACT_APP_CLOUDINARY_CLOUD_NAME=seu-cloud-name
-   REACT_APP_CLOUDINARY_API_KEY=sua-api-key
-   REACT_APP_CLOUDINARY_API_SECRET=seu-api-secret
-   ```
+2. Configure o Firebase:
 
-4. Inicie o servidor de desenvolvimento
+   - Crie um projeto no [Firebase Console](https://console.firebase.google.com/)
+   - Habilite Authentication, Storage e Firestore
+   - Atualize as credenciais no arquivo `js/modules/firebase-config.js`
+
+3. Configure a API do Google Maps:
+
+   - Obtenha uma chave de API no [Google Cloud Console](https://console.cloud.google.com/)
+   - Ative o faturamento (mesmo para o nível gratuito)
+   - Substitua a chave de API no arquivo `index.html`
+
+4. Inicie um servidor local:
+
    ```bash
-   npm start
+   # Usando Python
+   python -m http.server 8000
+
+   # OU usando Node.js com http-server
+   npx http-server
    ```
 
-## 📊 Desenvolvimento Futuro
+5. Acesse a aplicação em `http://localhost:8000`
 
-- Versão mobile como Progressive Web App (PWA)
-- Parcerias com ONGs e órgãos ambientais
-- Gamificação para incentivo à participação
-- Implementação de IA para análise de padrões de risco
+## 📱 PWA (Progressive Web App)
+
+Esta aplicação está configurada como um PWA, permitindo:
+
+- Instalação na tela inicial de dispositivos móveis
+- Funcionamento offline básico
+- Carregamento rápido e responsivo
+- Notificações push (em desenvolvimento)
+
+## 🔒 Privacidade e Segurança
+
+- Opção de denúncias anônimas
+- Autenticação segura via Firebase
+- Regras de segurança no Firebase para proteção de dados
+
+## 🤝 Contribuição
+
+Contribuições são bem-vindas! Para contribuir:
+
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-funcionalidade`)
+3. Commit suas mudanças (`git commit -m 'Adiciona nova funcionalidade'`)
+4. Push para a branch (`git push origin feature/nova-funcionalidade`)
+5. Abra um Pull Request
+
+### Guia de Estilo
+
+- Siga a organização modular de CSS e JavaScript
+- Mantenha a consistência com o design system existente
+- Documente novos componentes e funcionalidades
 
 ## 📜 Licença
 
-Este projeto está licenciado sob a Licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
+Este projeto está licenciado sob a licença MIT - veja o arquivo [LICENSE](LICENSE) para detalhes.
 
-## 👥 Contato
+## 📬 Contato
 
-Para mais informações sobre o projeto, entre em contato através de [luisteixeira@ufba.br].
+Para questões, sugestões ou colaborações, entre em contato através do GitHub ou abra uma issue no repositório.
+
+---
+
+Desenvolvido com ❤️ para proteção ambiental do Rio Capivara em Camaçari-BA.

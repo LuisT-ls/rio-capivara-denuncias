@@ -16,8 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Configurar autenticação
   setupAuth()
 
-  // Configurar mapa (será chamado pelo callback da API do Google Maps)
-  window.initMap = initMap
+  // Expor a função initMap globalmente para o callback do Google Maps
+  window.initMap = function () {
+    console.log('Callback do Google Maps executado')
+    initMap()
+  }
 
   // Configurar filtros do mapa
   setupMapFilters()
@@ -103,7 +106,11 @@ function setupModals() {
       document.getElementById('mapaModal').addEventListener(
         'shown.bs.modal',
         () => {
-          window.initSelectionMap() // Função que será definida no módulo map.js
+          if (typeof window.initSelectionMap === 'function') {
+            window.initSelectionMap() // Função definida no módulo map.js
+          } else {
+            console.error('Função initSelectionMap não está disponível')
+          }
         },
         { once: true }
       )

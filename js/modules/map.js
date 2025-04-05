@@ -10,37 +10,52 @@ let currentFilter = 'all'
 
 // Inicializa o mapa principal
 export function initMap() {
+  console.log('Função initMap chamada')
+
   const mapContainer = document.getElementById('mapContainer')
-  if (!mapContainer) return
+  if (!mapContainer) {
+    console.error('Container do mapa não encontrado')
+    return
+  }
 
-  // Coordenadas iniciais (centro de Camaçari, BA)
-  const camacariBa = { lat: -12.6996, lng: -38.3263 }
+  try {
+    // Coordenadas iniciais (centro de Camaçari, BA)
+    const camacariBa = { lat: -12.6996, lng: -38.3263 }
 
-  // Criar o mapa do Google Maps
-  map = new google.maps.Map(mapContainer, {
-    center: camacariBa,
-    zoom: 13,
-    mapTypeId: google.maps.MapTypeId.ROADMAP,
-    mapTypeControl: true,
-    mapTypeControlOptions: {
-      style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-      position: google.maps.ControlPosition.TOP_RIGHT
-    },
-    fullscreenControl: true,
-    streetViewControl: true,
-    zoomControl: true
-  })
+    // Criar o mapa do Google Maps
+    map = new google.maps.Map(mapContainer, {
+      center: camacariBa,
+      zoom: 13,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      mapTypeControl: true,
+      mapTypeControlOptions: {
+        style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+        position: google.maps.ControlPosition.TOP_RIGHT
+      },
+      fullscreenControl: true,
+      streetViewControl: true,
+      zoomControl: true
+    })
 
-  // Carregar as denúncias do Firebase
-  loadDenunciasFromFirebase()
+    console.log('Mapa criado com sucesso')
 
-  // Adicionar eventos para redimensionamento
-  window.addEventListener('resize', () => {
-    google.maps.event.trigger(map, 'resize')
-  })
+    // Carregar as denúncias do Firebase
+    loadDenunciasFromFirebase()
 
-  // Expor a função de inicialização do mapa de seleção
-  window.initSelectionMap = initSelectionMap
+    // Adicionar eventos para redimensionamento
+    window.addEventListener('resize', () => {
+      google.maps.event.trigger(map, 'resize')
+    })
+
+    // Expor a função de inicialização do mapa de seleção globalmente
+    window.initSelectionMap = initSelectionMap
+  } catch (error) {
+    console.error('Erro ao inicializar o mapa:', error)
+    showNotification(
+      'Erro ao carregar o mapa. Tente recarregar a página.',
+      'error'
+    )
+  }
 }
 
 // Inicializa o mapa para seleção de localização na denúncia

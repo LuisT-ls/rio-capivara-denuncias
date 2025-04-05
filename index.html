@@ -597,9 +597,23 @@
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Google Maps JS (Adicione sua API Key) -->
+    <!-- Google Maps JS -->
+    <script>
+      // Define a função de callback global para o Google Maps
+      window.initMapCallback = function () {
+        console.log('Google Maps carregado, tentando inicializar mapa...')
+        // Se o initMap já estiver definido, chame-o
+        if (typeof window.initMap === 'function') {
+          window.initMap()
+        } else {
+          // Caso a função não esteja pronta, espere um pouco e tente novamente
+          console.log('Função initMap ainda não está disponível. Aguardando...')
+          setTimeout(window.initMapCallback, 500)
+        }
+      }
+    </script>
     <script
-      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAyA4FOh413txVLKVLtpFTTzoemkWqxPhQ&callback=initMapCallback"
       async
       defer
     ></script>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Sistema de denúncias ambientais para o Rio Capivara em Camaçari-BA"
+    />
+    <title>Rio Capivara - Denúncias Ambientais</title>
+
+    <!-- Favicon -->
+    <link
+      rel="shortcut icon"
+      href="./assets/img/favicon/favicon.ico"
+      type="image/x-icon"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+
+    <!-- CSS Personalizado -->
+    <link rel="stylesheet" href="./assets/css/main.css" />
+
+    <!-- PWA Support -->
+    <link rel="manifest" href="./manifest.json" />
+    <meta name="theme-color" content="#00796b" />
+  </head>
+  <body>
+    <!-- Cabeçalho -->
+    <header class="header">
+      <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+          <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+              <span class="text-primary fw-bold">Rio Capivara</span>
+              <span class="text-success">Denúncias</span>
+            </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                  <a class="nav-link active" href="#inicio">Início</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#mapa">Mapa</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#denunciar">Denunciar</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#sobre">Sobre</a>
+                </li>
+                <li class="nav-item">
+                  <button id="loginBtn" class="btn btn-outline-success ms-2">
+                    Entrar
+                  </button>
+                </li>
+                <li class="nav-item">
+                  <button
+                    id="darkModeToggle"
+                    class="btn btn-sm ms-2"
+                    aria-label="Alternar modo escuro"
+                  >
+                    <i class="fas fa-moon"></i>
+                  </button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </div>
+    </header>
+
+    <!-- Seção de Banner/Hero -->
+    <section id="inicio" class="hero bg-light py-5">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h1 class="display-4 fw-bold">Proteja o Rio Capivara</h1>
+            <p class="lead">
+              Denuncie problemas ambientais, despejos ilegais e desmatamento.
+              Juntos podemos preservar nosso patrimônio natural.
+            </p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+              <a href="#denunciar" class="btn btn-primary btn-lg px-4 me-md-2"
+                >Fazer Denúncia</a
+              >
+              <a href="#mapa" class="btn btn-outline-secondary btn-lg px-4"
+                >Ver Mapa</a
+              >
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <img
+              src="https://via.placeholder.com/600x400"
+              alt="Rio Capivara"
+              class="img-fluid rounded shadow-lg"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção do Mapa -->
+    <section id="mapa" class="py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Mapa de Denúncias</h2>
+        <div class="row mb-4">
+          <div class="col-md-12">
+            <div
+              class="btn-group"
+              role="group"
+              aria-label="Filtros de denúncias"
+            >
+              <button
+                type="button"
+                class="btn btn-outline-primary active"
+                data-filter="all"
+              >
+                Todas
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                data-filter="desmatamento"
+              >
+                Desmatamento
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-warning"
+                data-filter="despejo"
+              >
+                Despejo Ilegal
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-info"
+                data-filter="poluicao"
+              >
+                Poluição
+              </button>
+              <button
+                type="button"
+                class="btn btn-outline-dark"
+                data-filter="outros"
+              >
+                Outros
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div id="mapContainer" class="map-container rounded shadow">
+              <!-- O mapa do Google será carregado aqui via JavaScript -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção de Denúncia -->
+    <section id="denunciar" class="py-5 bg-light">
+      <div class="container">
+        <h2 class="text-center mb-4">Fazer Denúncia</h2>
+        <div class="row justify-content-center">
+          <div class="col-md-8">
+            <div class="card shadow">
+              <div class="card-body">
+                <form id="denunciaForm">
+                  <div class="mb-3">
+                    <label for="tipoDenuncia" class="form-label"
+                      >Tipo de Problema</label
+                    >
+                    <select class="form-select" id="tipoDenuncia" required>
+                      <option value="" selected disabled>
+                        Selecione o tipo
+                      </option>
+                      <option value="desmatamento">Desmatamento</option>
+                      <option value="despejo">Despejo Ilegal</option>
+                      <option value="poluicao">Poluição</option>
+                      <option value="outros">Outros</option>
+                    </select>
+                  </div>
+
+                  <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição</label>
+                    <textarea
+                      class="form-control"
+                      id="descricao"
+                      rows="3"
+                      placeholder="Descreva o problema observado"
+                      required
+                    ></textarea>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Foto</label>
+                    <div class="d-flex gap-3">
+                      <button
+                        type="button"
+                        id="tirarFotoBtn"
+                        class="btn btn-outline-primary flex-grow-1"
+                      >
+                        <i class="fas fa-camera me-2"></i>Tirar Foto
+                      </button>
+                      <button
+                        type="button"
+                        id="uploadFotoBtn"
+                        class="btn btn-outline-secondary flex-grow-1"
+                      >
+                        <i class="fas fa-upload me-2"></i>Enviar Foto
+                      </button>
+                    </div>
+                    <input
+                      type="file"
+                      id="fotoInput"
+                      accept="image/*"
+                      class="visually-hidden"
+                    />
+                    <div id="fotoPreview" class="mt-3 d-none">
+                      <img
+                        src=""
+                        alt="Preview da foto"
+                        class="img-fluid rounded"
+                      />
+                      <button
+                        type="button"
+                        id="removerFotoBtn"
+                        class="btn btn-sm btn-danger position-absolute top-0 end-0 m-2"
+                      >
+                        <i class="fas fa-times"></i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="mb-3">
+                    <label class="form-label">Localização</label>
+                    <div class="d-flex gap-3">
+                      <button
+                        type="button"
+                        id="obterLocalizacaoBtn"
+                        class="btn btn-outline-success flex-grow-1"
+                      >
+                        <i class="fas fa-map-marker-alt me-2"></i>Usar Minha
+                        Localização
+                      </button>
+                      <button
+                        type="button"
+                        id="selecionarNoMapaBtn"
+                        class="btn btn-outline-primary flex-grow-1"
+                      >
+                        <i class="fas fa-map me-2"></i>Selecionar no Mapa
+                      </button>
+                    </div>
+                    <div id="localizacaoInfo" class="mt-2 d-none">
+                      <div class="alert alert-success">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <span id="localizacaoTexto">Localização capturada</span>
+                      </div>
+                    </div>
+                    <input type="hidden" id="latitude" name="latitude" />
+                    <input type="hidden" id="longitude" name="longitude" />
+                  </div>
+
+                  <div class="form-check mb-3">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      id="anonimo"
+                    />
+                    <label class="form-check-label" for="anonimo">
+                      Fazer denúncia anônima
+                    </label>
+                  </div>
+
+                  <div class="mb-3" id="contatoFields">
+                    <label for="email" class="form-label"
+                      >E-mail para acompanhamento (opcional)</label
+                    >
+                    <input
+                      type="email"
+                      class="form-control"
+                      id="email"
+                      placeholder="seuemail@exemplo.com"
+                    />
+                  </div>
+
+                  <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">
+                      Enviar Denúncia
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Sobre -->
+    <section id="sobre" class="py-5">
+      <div class="container">
+        <h2 class="text-center mb-4">Sobre o Projeto</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <h3>Rio Capivara</h3>
+            <p>
+              O Rio Capivara é um importante recurso natural de Camaçari-BA, que
+              enfrenta desafios ambientais como despejo ilegal de resíduos e
+              desmatamento em suas margens.
+            </p>
+            <p>
+              Esta plataforma foi criada para permitir que a comunidade local
+              participe ativamente da proteção deste patrimônio natural, através
+              de denúncias georreferenciadas.
+            </p>
+          </div>
+          <div class="col-md-6">
+            <h3>Como Funciona</h3>
+            <ol class="list-group list-group-numbered mb-4">
+              <li class="list-group-item">
+                Faça uma denúncia com foto e localização
+              </li>
+              <li class="list-group-item">
+                Sua denúncia será avaliada pela nossa equipe
+              </li>
+              <li class="list-group-item">
+                Encaminharemos aos órgãos responsáveis
+              </li>
+              <li class="list-group-item">
+                Acompanhe o status da sua denúncia
+              </li>
+            </ol>
+            <p>
+              Juntos podemos preservar o Rio Capivara para as futuras gerações!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Modal para Login -->
+    <div
+      class="modal fade"
+      id="loginModal"
+      tabindex="-1"
+      aria-labelledby="loginModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Acesso</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="loginEmail" class="form-label">E-mail</label>
+              <input
+                type="email"
+                class="form-control"
+                id="loginEmail"
+                placeholder="seuemail@exemplo.com"
+              />
+            </div>
+            <div class="mb-3">
+              <label for="loginSenha" class="form-label">Senha</label>
+              <input type="password" class="form-control" id="loginSenha" />
+            </div>
+            <div class="d-grid mb-3">
+              <button id="entrarBtn" class="btn btn-primary">Entrar</button>
+            </div>
+            <div class="d-grid gap-2">
+              <button id="googleLoginBtn" class="btn btn-outline-danger">
+                <i class="fab fa-google me-2"></i>Entrar com Google
+              </button>
+              <button id="facebookLoginBtn" class="btn btn-outline-primary">
+                <i class="fab fa-facebook me-2"></i>Entrar com Facebook
+              </button>
+            </div>
+            <hr />
+            <p class="text-center">
+              Não tem uma conta? <a href="#" id="cadastroLink">Cadastre-se</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para Cadastro -->
+    <div
+      class="modal fade"
+      id="cadastroModal"
+      tabindex="-1"
+      aria-labelledby="cadastroModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="cadastroModalLabel">Criar Conta</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div class="mb-3">
+              <label for="cadastroNome" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="cadastroNome" />
+            </div>
+            <div class="mb-3">
+              <label for="cadastroEmail" class="form-label">E-mail</label>
+              <input type="email" class="form-control" id="cadastroEmail" />
+            </div>
+            <div class="mb-3">
+              <label for="cadastroSenha" class="form-label">Senha</label>
+              <input type="password" class="form-control" id="cadastroSenha" />
+            </div>
+            <div class="mb-3">
+              <label for="confirmSenha" class="form-label"
+                >Confirmar Senha</label
+              >
+              <input type="password" class="form-control" id="confirmSenha" />
+            </div>
+            <div class="form-check mb-3">
+              <input class="form-check-input" type="checkbox" id="termos" />
+              <label class="form-check-label" for="termos">
+                Concordo com os
+                <a href="./pages/terms-of-service.html" target="_blank"
+                  >Termos de Serviço</a
+                >
+                e a
+                <a href="./pages/privacy.html" target="_blank"
+                  >Política de Privacidade</a
+                >
+              </label>
+            </div>
+            <div class="d-grid">
+              <button id="cadastrarBtn" class="btn btn-success">
+                Cadastrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal do Mapa para Seleção de Localização -->
+    <div
+      class="modal fade"
+      id="mapaModal"
+      tabindex="-1"
+      aria-labelledby="mapaModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="mapaModalLabel">
+              Selecione a Localização
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div
+              id="selecionarMapaContainer"
+              class="map-container rounded"
+            ></div>
+            <p class="mt-2 text-muted">
+              Clique no mapa para marcar a localização exata do problema.
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancelar
+            </button>
+            <button
+              type="button"
+              id="confirmarLocalizacaoBtn"
+              class="btn btn-primary"
+            >
+              Confirmar
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Notificações -->
+    <div
+      id="notificacoes"
+      class="notification-container position-fixed bottom-0 end-0 p-3"
+    ></div>
+
+    <!-- Footer -->
+    <footer class="py-4 bg-dark text-white">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-3">
+            <h5>Rio Capivara Denúncias</h5>
+            <p>
+              Um projeto para preservação ambiental e engajamento comunitário em
+              Camaçari-BA.
+            </p>
+          </div>
+          <div class="col-lg-4 mb-3">
+            <h5>Links Úteis</h5>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-white">Órgãos ambientais</a></li>
+              <li><a href="#" class="text-white">ONGs parceiras</a></li>
+              <li>
+                <a href="./pages/privacy.html" class="text-white"
+                  >Política de Privacidade</a
+                >
+              </li>
+              <li>
+                <a href="./pages/terms-of-service.html" class="text-white"
+                  >Termos de Serviço</a
+                >
+              </li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h5>Contato</h5>
+            <ul class="list-unstyled">
+              <li>
+                <i class="fas fa-envelope me-2"></i>contato@riocapivara.org
+              </li>
+              <li><i class="fas fa-phone me-2"></i>(71) 9XXXX-XXXX</li>
+              <li class="mt-3">
+                <a href="#" class="text-white me-2"
+                  ><i class="fab fa-facebook fa-lg"></i
+                ></a>
+                <a href="#" class="text-white me-2"
+                  ><i class="fab fa-instagram fa-lg"></i
+                ></a>
+                <a href="#" class="text-white me-2"
+                  ><i class="fab fa-twitter fa-lg"></i
+                ></a>
+                <a href="#" class="text-white"
+                  ><i class="fab fa-github fa-lg"></i
+                ></a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <hr />
+        <div class="text-center">
+          <p class="mb-0">
+            &copy; 2023 Rio Capivara Denúncias. Todos os direitos reservados.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Google Maps JS (Adicione sua API Key) -->
+    <script
+      src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&callback=initMap"
+      async
+      defer
+    ></script>
+
+    <!-- Firebase -->
+    <script type="module" src="./js/modules/firebase-config.js"></script>
+
+    <!-- JavaScript Principal -->
+    <script type="module" src="./js/main.js"></script>
+
+    <!-- Service Worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker
+            .register('./sw.js')
+            .then(registration => {
+              console.log(
+                'Service Worker registrado com sucesso:',
+                registration
+              )
+            })
+            .catch(error => {
+              console.log('Falha ao registrar o Service Worker:', error)
+            })
+        })
+      }
+    </script>
+  </body>
+</html>

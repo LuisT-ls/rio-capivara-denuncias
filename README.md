@@ -10,8 +10,7 @@ Esta aplicação permite o registro fotográfico e georreferenciado de situaçõ
 
 ### Frontend
 - HTML5, CSS3, JavaScript
-- React.js
-- Bootstrap
+- Bootstrap, Google Fonts, Font Awesome
 
 ### Backend
 - Node.js com Express.js

@@ -1,13 +1,12 @@
-import { auth, getCurrentUser } from './firebase-config.js'
-
 import {
-  signInWithEmailAndPassword,
-  createUserWithEmailAndPassword,
-  signInWithPopup,
-  GoogleAuthProvider,
-  FacebookAuthProvider,
-  signOut
-} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js'
+  auth,
+  getCurrentUser,
+  loginWithEmail,
+  loginWithGoogle,
+  loginWithFacebook,
+  registerUser,
+  logoutUser
+} from './firebase-config.js'
 
 import { showNotification } from './notifications.js'
 
@@ -25,13 +24,15 @@ export function setupAuth() {
       console.error('Erro ao verificar autenticação:', error)
     })
 
-  // Configurar eventos para formulário de login
-  const loginForm = document
-    .getElementById('loginBtn')
-    .closest('.modal')
-    .querySelector('form')
-  if (loginForm) {
-    loginForm.addEventListener('submit', handleLogin)
+  // Configurar botão de login no cabeçalho
+  const loginBtn = document.getElementById('loginBtn')
+  if (loginBtn) {
+    loginBtn.addEventListener('click', () => {
+      const loginModal = new bootstrap.Modal(
+        document.getElementById('loginModal')
+      )
+      loginModal.show()
+    })
   }
 
   // Botão de login com e-mail e senha
@@ -58,8 +59,25 @@ export function setupAuth() {
     cadastrarBtn.addEventListener('click', handleRegister)
   }
 
-  // Configurar evento de logout
-  setupLogoutButton()
+  // Link de cadastro no modal de login
+  const cadastroLink = document.getElementById('cadastroLink')
+  if (cadastroLink) {
+    cadastroLink.addEventListener('click', e => {
+      e.preventDefault()
+
+      // Fechar modal de login
+      const loginModal = bootstrap.Modal.getInstance(
+        document.getElementById('loginModal')
+      )
+      loginModal.hide()
+
+      // Abrir modal de cadastro
+      const cadastroModal = new bootstrap.Modal(
+        document.getElementById('cadastroModal')
+      )
+      cadastroModal.show()
+    })
+  }
 }
 
 // Atualizar a interface baseado no estado de autenticação
@@ -89,7 +107,9 @@ function updateAuthState(user) {
       logoutBtn.textContent = 'Sair'
       logoutBtn.addEventListener('click', handleLogout)
 
-      loginBtn.parentNode.appendChild(logoutBtn)
+      if (loginBtn && loginBtn.parentNode) {
+        loginBtn.parentNode.appendChild(logoutBtn)
+      }
     }
 
     // Fechar modal de login se estiver aberto
@@ -129,7 +149,7 @@ function updateAuthState(user) {
 
 // Função para lidar com o login via e-mail e senha
 async function handleLogin(e) {
-  e.preventDefault()
+  if (e) e.preventDefault()
 
   const email = document.getElementById('loginEmail').value
   const senha = document.getElementById('loginSenha').value
@@ -140,8 +160,17 @@ async function handleLogin(e) {
   }
 
   try {
-    const userCredential = await signInWithEmailAndPassword(auth, email, senha)
-    updateAuthState(userCredential.user)
+    // Mostrar indicador de carregamento
+    const entrarBtn = document.getElementById('entrarBtn')
+    if (entrarBtn) {
+      entrarBtn.disabled = true
+      entrarBtn.innerHTML =
+        '<i class="fas fa-spinner fa-spin me-2"></i>Entrando...'
+    }
+
+    // Fazer login usando a função do firebase-config
+    const user = await loginWithEmail(email, senha)
+    updateAuthState(user)
   } catch (error) {
     console.error('Erro ao fazer login:', error)
 
@@ -161,36 +190,89 @@ async function handleLogin(e) {
     }
 
     showNotification(mensagemErro, 'error')
+  } finally {
+    // Restaurar botão
+    const entrarBtn = document.getElementById('entrarBtn')
+    if (entrarBtn) {
+      entrarBtn.disabled = false
+      entrarBtn.textContent = 'Entrar'
+    }
   }
 }
 
 // Login com Google
 async function handleGoogleLogin() {
   try {
-    const provider = new GoogleAuthProvider()
-    const result = await signInWithPopup(auth, provider)
-    updateAuthState(result.user)
+    // Mostrar indicador de carregamento
+    const googleBtn = document.getElementById('googleLoginBtn')
+    if (googleBtn) {
+      googleBtn.disabled = true
+      googleBtn.innerHTML =
+        '<i class="fas fa-spinner fa-spin me-2"></i>Processando...'
+    }
+
+    // Usar função do firebase-config
+    const user = await loginWithGoogle()
+    updateAuthState(user)
   } catch (error) {
     console.error('Erro ao fazer login com Google:', error)
-    showNotification('Erro ao fazer login com Google', 'error')
+
+    // Se o usuário cancelou o login, não mostrar erro
+    if (
+      error.code !== 'auth/cancelled-popup-request' &&
+      error.code !== 'auth/popup-closed-by-user'
+    ) {
+      showNotification('Erro ao fazer login com Google', 'error')
+    }
+  } finally {
+    // Restaurar botão
+    const googleBtn = document.getElementById('googleLoginBtn')
+    if (googleBtn) {
+      googleBtn.disabled = false
+      googleBtn.innerHTML =
+        '<i class="fab fa-google me-2"></i>Entrar com Google'
+    }
   }
 }
 
 // Login com Facebook
 async function handleFacebookLogin() {
   try {
-    const provider = new FacebookAuthProvider()
-    const result = await signInWithPopup(auth, provider)
-    updateAuthState(result.user)
+    // Mostrar indicador de carregamento
+    const facebookBtn = document.getElementById('facebookLoginBtn')
+    if (facebookBtn) {
+      facebookBtn.disabled = true
+      facebookBtn.innerHTML =
+        '<i class="fas fa-spinner fa-spin me-2"></i>Processando...'
+    }
+
+    // Usar função do firebase-config
+    const user = await loginWithFacebook()
+    updateAuthState(user)
   } catch (error) {
     console.error('Erro ao fazer login com Facebook:', error)
-    showNotification('Erro ao fazer login com Facebook', 'error')
+
+    // Se o usuário cancelou o login, não mostrar erro
+    if (
+      error.code !== 'auth/cancelled-popup-request' &&
+      error.code !== 'auth/popup-closed-by-user'
+    ) {
+      showNotification('Erro ao fazer login com Facebook', 'error')
+    }
+  } finally {
+    // Restaurar botão
+    const facebookBtn = document.getElementById('facebookLoginBtn')
+    if (facebookBtn) {
+      facebookBtn.disabled = false
+      facebookBtn.innerHTML =
+        '<i class="fab fa-facebook me-2"></i>Entrar com Facebook'
+    }
   }
 }
 
 // Registro de novo usuário
 async function handleRegister(e) {
-  e.preventDefault()
+  if (e) e.preventDefault()
 
   const nome = document.getElementById('cadastroNome').value
   const email = document.getElementById('cadastroEmail').value
@@ -216,18 +298,17 @@ async function handleRegister(e) {
 
   // Criar conta
   try {
-    const userCredential = await createUserWithEmailAndPassword(
-      auth,
-      email,
-      senha
-    )
+    // Mostrar indicador de carregamento
+    const cadastrarBtn = document.getElementById('cadastrarBtn')
+    if (cadastrarBtn) {
+      cadastrarBtn.disabled = true
+      cadastrarBtn.innerHTML =
+        '<i class="fas fa-spinner fa-spin me-2"></i>Criando conta...'
+    }
 
-    // Atualizar perfil do usuário com o nome
-    await updateProfile(userCredential.user, {
-      displayName: nome
-    })
-
-    updateAuthState(userCredential.user)
+    // Usar função do firebase-config
+    const user = await registerUser(email, senha, nome)
+    updateAuthState(user)
 
     // Fechar modal
     const cadastroModal = bootstrap.Modal.getInstance(
@@ -253,13 +334,20 @@ async function handleRegister(e) {
     }
 
     showNotification(mensagemErro, 'error')
+  } finally {
+    // Restaurar botão
+    const cadastrarBtn = document.getElementById('cadastrarBtn')
+    if (cadastrarBtn) {
+      cadastrarBtn.disabled = false
+      cadastrarBtn.textContent = 'Cadastrar'
+    }
   }
 }
 
 // Função para fazer logout
 async function handleLogout() {
   try {
-    await signOut(auth)
+    await logoutUser()
     updateAuthState(null)
     showNotification('Você saiu da sua conta', 'info')
   } catch (error) {
@@ -280,14 +368,25 @@ function showAccountPage() {
   showNotification('Funcionalidade em desenvolvimento', 'info')
 }
 
-function setupLogoutButton() {
-  const logoutBtn = document.getElementById('logoutBtn')
-  if (logoutBtn) {
-    logoutBtn.addEventListener('click', handleLogout)
-  }
-}
-
 // Exporta a função para obter o usuário atual
 export function getUser() {
   return currentUser
+}
+
+// Verificar se o usuário é um administrador
+export async function isUserAdmin() {
+  if (!currentUser) return false
+
+  try {
+    const q = query(
+      collection(db, 'usuarios'),
+      where('uid', '==', currentUser.uid),
+      where('tipo', '==', 'admin')
+    )
+    const querySnapshot = await getDocs(q)
+    return !querySnapshot.empty
+  } catch (error) {
+    console.error('Erro ao verificar se usuário é admin:', error)
+    return false
+  }
 }

@@ -1,10 +1,4 @@
-import { db } from './firebase-config.js'
-import {
-  collection,
-  getDocs,
-  query,
-  where
-} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js'
+import { db, obterDenuncias, obterDenunciasPorTipo } from './firebase-config.js'
 import { showNotification } from './notifications.js'
 
 // Variáveis globais para o mapa
@@ -44,6 +38,9 @@ export function initMap() {
   window.addEventListener('resize', () => {
     google.maps.event.trigger(map, 'resize')
   })
+
+  // Expor a função de inicialização do mapa de seleção
+  window.initSelectionMap = initSelectionMap
 }
 
 // Inicializa o mapa para seleção de localização na denúncia
@@ -136,9 +133,6 @@ export function initSelectionMap() {
       }
     })
   }
-
-  // Expor a função de inicialização globalmente
-  window.initSelectionMap = initSelectionMap
 }
 
 // Configurar filtros de denúncias no mapa
@@ -146,7 +140,7 @@ export function setupMapFilters() {
   const filterButtons = document.querySelectorAll('[data-filter]')
 
   filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
+    button.addEventListener('click', async () => {
       // Remover classe 'active' de todos os botões
       filterButtons.forEach(btn => btn.classList.remove('active'))
 
@@ -156,8 +150,8 @@ export function setupMapFilters() {
       // Atualizar filtro atual
       currentFilter = button.getAttribute('data-filter')
 
-      // Filtrar marcadores
-      filterMarkers(currentFilter)
+      // Carregar denúncias com o novo filtro
+      await loadDenunciasFromFirebase()
     })
   })
 }
@@ -167,32 +161,75 @@ async function loadDenunciasFromFirebase() {
   if (!map) return
 
   try {
+    // Mostrar indicador de carregamento
+    showLoadingIndicator(true)
+
     // Limpar marcadores existentes
     clearMarkers()
 
-    // Referência à coleção de denúncias
-    const denunciasRef = collection(db, 'denuncias')
+    let denuncias = []
 
-    // Buscar todas as denúncias (ou filtrar conforme necessário)
-    const q = query(denunciasRef)
-    const querySnapshot = await getDocs(q)
+    // Buscar denúncias com base no filtro atual
+    if (currentFilter === 'all') {
+      denuncias = await obterDenuncias()
+    } else {
+      denuncias = await obterDenunciasPorTipo(currentFilter)
+    }
 
     // Adicionar marcadores para cada denúncia
-    querySnapshot.forEach(doc => {
-      const denuncia = doc.data()
-      addDenunciaMarker(denuncia, doc.id)
+    denuncias.forEach(denuncia => {
+      addDenunciaMarker(denuncia)
     })
 
-    // Aplicar filtro atual
-    filterMarkers(currentFilter)
+    // Se não houver denúncias para mostrar
+    if (denuncias.length === 0) {
+      showNotification(
+        `Nenhuma denúncia encontrada${
+          currentFilter !== 'all'
+            ? ` do tipo ${formatTipoDenuncia(currentFilter)}`
+            : ''
+        }.`,
+        'info'
+      )
+    }
   } catch (error) {
     console.error('Erro ao carregar denúncias:', error)
     showNotification('Erro ao carregar denúncias do servidor', 'error')
+  } finally {
+    // Esconder indicador de carregamento
+    showLoadingIndicator(false)
+  }
+}
+
+// Mostrar/esconder indicador de carregamento
+function showLoadingIndicator(show) {
+  // Implementar um indicador de carregamento no mapa, se necessário
+  // Por exemplo, adicionar/remover uma div com spinner
+  const mapContainer = document.getElementById('mapContainer')
+
+  if (!mapContainer) return
+
+  let loadingIndicator = document.getElementById('mapLoadingIndicator')
+
+  if (show) {
+    if (!loadingIndicator) {
+      loadingIndicator = document.createElement('div')
+      loadingIndicator.id = 'mapLoadingIndicator'
+      loadingIndicator.className =
+        'position-absolute top-50 start-50 translate-middle bg-white p-3 rounded shadow'
+      loadingIndicator.innerHTML =
+        '<i class="fas fa-spinner fa-spin me-2"></i>Carregando denúncias...'
+      mapContainer.appendChild(loadingIndicator)
+    }
+  } else {
+    if (loadingIndicator) {
+      loadingIndicator.remove()
+    }
   }
 }
 
 // Adicionar marcador para uma denúncia
-function addDenunciaMarker(denuncia, denunciaId) {
+function addDenunciaMarker(denuncia) {
   if (!map || !denuncia.localizacao) return
 
   // Criar posição a partir dos dados
@@ -236,13 +273,18 @@ function addDenunciaMarker(denuncia, denunciaId) {
             <p class="info-desc">${denuncia.descricao}</p>
             ${
               denuncia.fotoUrl
-                ? `<img src="${denuncia.fotoUrl}" alt="Foto da denúncia" class="info-img">`
+                ? `<img src="${denuncia.fotoUrl}" alt="Foto da denúncia" class="info-img img-fluid rounded mb-2" style="max-width: 100%; max-height: 150px;">`
                 : ''
             }
             <p class="info-date">Reportado em: ${formatDate(
               denuncia.dataCriacao
             )}</p>
-            <a href="#denuncia-${denunciaId}" class="btn btn-sm btn-primary">Ver Detalhes</a>
+            <p class="info-status">Status: <span class="badge bg-${getStatusColor(
+              denuncia.status
+            )}">${formatStatus(denuncia.status)}</span></p>
+            <a href="#denuncia-${
+              denuncia.id
+            }" class="btn btn-sm btn-primary">Ver Detalhes</a>
         </div>
     `
 
@@ -274,21 +316,6 @@ function addDenunciaMarker(denuncia, denunciaId) {
   markers.push(marker)
 }
 
-// Filtrar marcadores
-function filterMarkers(filter) {
-  markers.forEach(marker => {
-    if (filter === 'all' || marker.denunciaTipo === filter) {
-      marker.setVisible(true)
-    } else {
-      marker.setVisible(false)
-      // Fechar infowindow se estiver aberta
-      if (marker.infoWindow && marker.infoWindow.getMap()) {
-        marker.infoWindow.close()
-      }
-    }
-  })
-}
-
 // Limpar todos os marcadores
 function clearMarkers() {
   markers.forEach(marker => marker.setMap(null))
@@ -305,6 +332,32 @@ function formatTipoDenuncia(tipo) {
   }
 
   return formatMap[tipo] || 'Denúncia'
+}
+
+// Função para formatar status
+function formatStatus(status) {
+  const formatMap = {
+    pendente: 'Pendente',
+    analise: 'Em Análise',
+    aprovada: 'Aprovada',
+    rejeitada: 'Rejeitada',
+    resolvida: 'Resolvida'
+  }
+
+  return formatMap[status] || 'Pendente'
+}
+
+// Função para obter cor do status
+function getStatusColor(status) {
+  const colorMap = {
+    pendente: 'warning',
+    analise: 'info',
+    aprovada: 'primary',
+    rejeitada: 'danger',
+    resolvida: 'success'
+  }
+
+  return colorMap[status] || 'secondary'
 }
 
 // Função para formatar data
@@ -368,4 +421,18 @@ export function getCurrentLocation() {
       }
     )
   })
+}
+
+// Centralizar mapa em uma localização específica
+export function centerMapOn(latitude, longitude, zoom = 16) {
+  if (!map) return
+
+  const position = { lat: latitude, lng: longitude }
+  map.setCenter(position)
+  map.setZoom(zoom)
+}
+
+// Recarregar as denúncias (útil para atualizar o mapa após uma nova denúncia)
+export function reloadDenuncias() {
+  loadDenunciasFromFirebase()
 }

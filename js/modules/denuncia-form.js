@@ -1,14 +1,4 @@
-import { db, storage } from './firebase-config.js'
-import {
-  collection,
-  addDoc,
-  serverTimestamp
-} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js'
-import {
-  ref,
-  uploadBytes,
-  getDownloadURL
-} from 'https://www.gstatic.com/firebasejs/10.7.1/firebase-storage.js'
+import { criarDenuncia, uploadImagem } from './firebase-config.js'
 import { getUser } from './auth.js'
 import { getCurrentLocation } from './map.js'
 import { showNotification } from './notifications.js'
@@ -43,6 +33,15 @@ export function setupDenunciaForm() {
         contatoFields.classList.remove('d-none')
       }
     })
+  }
+
+  // Verificar se há um usuário logado e preencher e-mail automaticamente
+  const currentUser = getUser()
+  if (currentUser && currentUser.email) {
+    const emailInput = document.getElementById('email')
+    if (emailInput) {
+      emailInput.value = currentUser.email
+    }
   }
 }
 
@@ -226,7 +225,8 @@ async function handleSubmitDenuncia(e) {
     // 1. Fazer upload da foto (se existir)
     let fotoUrl = null
     if (fotoArquivo) {
-      fotoUrl = await uploadFoto(fotoArquivo)
+      // Usar a função centralizada de uploadImagem do firebase-config.js
+      fotoUrl = await uploadImagem(fotoArquivo, 'denuncias')
     }
 
     // 2. Preparar objeto de denúncia
@@ -237,8 +237,6 @@ async function handleSubmitDenuncia(e) {
         latitude: parseFloat(latitude.value),
         longitude: parseFloat(longitude.value)
       },
-      dataCriacao: serverTimestamp(),
-      status: 'pendente', // Status inicial
       anonimo: anonimo.checked,
       email: !anonimo.checked && email.value ? email.value : null,
       fotoUrl: fotoUrl
@@ -251,8 +249,8 @@ async function handleSubmitDenuncia(e) {
       denuncia.usuarioNome = currentUser.displayName || null
     }
 
-    // 3. Salvar no Firestore
-    const docRef = await addDoc(collection(db, 'denuncias'), denuncia)
+    // 3. Salvar no Firestore usando a função do firebase-config.js
+    const denunciaId = await criarDenuncia(denuncia)
 
     // 4. Mostrar sucesso e limpar formulário
     showNotification('Denúncia enviada com sucesso!', 'success')
@@ -262,7 +260,7 @@ async function handleSubmitDenuncia(e) {
     setTimeout(() => {
       window.location.href = `#mapa`
       // Alternativa: Exibir modal de sucesso com mais detalhes
-      mostrarModalSucesso(docRef.id)
+      mostrarModalSucesso(denunciaId)
     }, 1500)
   } catch (error) {
     console.error('Erro ao enviar denúncia:', error)
@@ -271,29 +269,6 @@ async function handleSubmitDenuncia(e) {
     // Restaurar botão de envio
     submitBtn.disabled = false
     submitBtn.textContent = 'Enviar Denúncia'
-  }
-}
-
-// Fazer upload da foto
-async function uploadFoto(file) {
-  try {
-    // Gerar nome único para o arquivo
-    const timestamp = new Date().getTime()
-    const fileName = `denuncias/${timestamp}_${file.name}`
-
-    // Criar referência para o arquivo no Firebase Storage
-    const storageRef = ref(storage, fileName)
-
-    // Fazer upload
-    const snapshot = await uploadBytes(storageRef, file)
-
-    // Obter URL de download
-    const downloadURL = await getDownloadURL(snapshot.ref)
-
-    return downloadURL
-  } catch (error) {
-    console.error('Erro ao fazer upload da foto:', error)
-    throw new Error('Falha ao enviar a foto. Tente novamente.')
   }
 }
 
@@ -345,27 +320,27 @@ function mostrarModalSucesso(denunciaId) {
 
     // Criar conteúdo do modal
     modal.innerHTML = `
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header bg-success text-white">
-                        <h5 class="modal-title">Denúncia Enviada!</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="text-center mb-4">
-                            <i class="fas fa-check-circle text-success fa-4x"></i>
-                        </div>
-                        <p>Sua denúncia foi enviada com sucesso e será analisada por nossa equipe.</p>
-                        <p>Identificador da denúncia: <strong>${denunciaId}</strong></p>
-                        <p>Você pode acompanhar o status da sua denúncia pelo mapa ou pela sua conta.</p>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                        <a href="#mapa" class="btn btn-primary" data-bs-dismiss="modal">Ver no Mapa</a>
-                    </div>
-                </div>
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-success text-white">
+            <h5 class="modal-title">Denúncia Enviada!</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <div class="text-center mb-4">
+              <i class="fas fa-check-circle text-success fa-4x"></i>
             </div>
-        `
+            <p>Sua denúncia foi enviada com sucesso e será analisada por nossa equipe.</p>
+            <p>Identificador da denúncia: <strong>${denunciaId}</strong></p>
+            <p>Você pode acompanhar o status da sua denúncia pelo mapa ou pela sua conta.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            <a href="#mapa" class="btn btn-primary" data-bs-dismiss="modal">Ver no Mapa</a>
+          </div>
+        </div>
+      </div>
+    `
 
     // Adicionar ao corpo do documento
     document.body.appendChild(modal)

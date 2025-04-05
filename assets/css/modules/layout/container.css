@@ -1,0 +1,354 @@
+/*
+ * Containers e Grid
+ * Sistema de layout para organizar conteúdo
+ */
+
+/* Container principal */
+.container {
+  width: 100%;
+  max-width: var(--container-max-width);
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--container-padding);
+  padding-left: var(--container-padding);
+}
+
+/* Container fluido (largura total) */
+.container-fluid {
+  width: 100%;
+  padding-right: var(--container-padding);
+  padding-left: var(--container-padding);
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Containers com larguras específicas */
+.container-sm {
+  max-width: 540px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--container-padding);
+  padding-left: var(--container-padding);
+}
+
+.container-md {
+  max-width: 720px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--container-padding);
+  padding-left: var(--container-padding);
+}
+
+.container-lg {
+  max-width: 960px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--container-padding);
+  padding-left: var(--container-padding);
+}
+
+.container-xl {
+  max-width: 1140px;
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: var(--container-padding);
+  padding-left: var(--container-padding);
+}
+
+/* Container com padding reduzido para seções */
+.container-tight {
+  padding-right: calc(var(--container-padding) / 2);
+  padding-left: calc(var(--container-padding) / 2);
+}
+
+/* Layout em grade (row/column) */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: calc(var(--space-md) * -1);
+  margin-left: calc(var(--space-md) * -1);
+}
+
+.row > * {
+  flex-shrink: 0;
+  width: 100%;
+  max-width: 100%;
+  padding-right: var(--space-md);
+  padding-left: var(--space-md);
+}
+
+/* Alinhamento vertical na row */
+.row-align-top {
+  align-items: flex-start;
+}
+
+.row-align-center {
+  align-items: center;
+}
+
+.row-align-bottom {
+  align-items: flex-end;
+}
+
+.row-align-stretch {
+  align-items: stretch;
+}
+
+/* Alinhamento horizontal na row */
+.row-justify-start {
+  justify-content: flex-start;
+}
+
+.row-justify-center {
+  justify-content: center;
+}
+
+.row-justify-end {
+  justify-content: flex-end;
+}
+
+.row-justify-between {
+  justify-content: space-between;
+}
+
+.row-justify-around {
+  justify-content: space-around;
+}
+
+/* Sem gutters (espaçamento entre colunas) */
+.row-no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.row-no-gutters > * {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+/* Gutters personalizados */
+.row-gutters-sm {
+  margin-right: calc(var(--space-sm) * -1);
+  margin-left: calc(var(--space-sm) * -1);
+}
+
+.row-gutters-sm > * {
+  padding-right: var(--space-sm);
+  padding-left: var(--space-sm);
+}
+
+.row-gutters-lg {
+  margin-right: calc(var(--space-lg) * -1);
+  margin-left: calc(var(--space-lg) * -1);
+}
+
+.row-gutters-lg > * {
+  padding-right: var(--space-lg);
+  padding-left: var(--space-lg);
+}
+
+/* Grid responsivo com CSS Grid */
+.grid {
+  display: grid;
+  gap: var(--space-md);
+  grid-template-columns: repeat(12, 1fr);
+}
+
+.grid-cols-1 {
+  grid-template-columns: repeat(1, 1fr);
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.grid-cols-auto-fit {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* Tamanhos de gaps */
+.gap-sm {
+  gap: var(--space-sm);
+}
+
+.gap-md {
+  gap: var(--space-md);
+}
+
+.gap-lg {
+  gap: var(--space-lg);
+}
+
+.gap-xl {
+  gap: var(--space-xl);
+}
+
+/* Containers com bordas e sombras */
+.card-container {
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-md);
+  transition: box-shadow var(--transition-normal),
+    transform var(--transition-normal);
+}
+
+.card-container:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.card-container-elevated {
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-lg);
+}
+
+/* Media queries para responsividade */
+@media (max-width: 576px) {
+  .container {
+    padding-right: var(--space-sm);
+    padding-left: var(--space-sm);
+  }
+
+  .container-fluid {
+    padding-right: var(--space-sm);
+    padding-left: var(--space-sm);
+  }
+
+  .row {
+    margin-right: calc(var(--space-sm) * -1);
+    margin-left: calc(var(--space-sm) * -1);
+  }
+
+  .row > * {
+    padding-right: var(--space-sm);
+    padding-left: var(--space-sm);
+  }
+}
+
+/* Classes de ordem para flexbox */
+.order-first {
+  order: -1;
+}
+
+.order-0 {
+  order: 0;
+}
+
+.order-1 {
+  order: 1;
+}
+
+.order-2 {
+  order: 2;
+}
+
+.order-3 {
+  order: 3;
+}
+
+.order-last {
+  order: 999;
+}
+
+/* Helpers para flexbox */
+.d-flex {
+  display: flex;
+}
+
+.flex-row {
+  flex-direction: row;
+}
+
+.flex-column {
+  flex-direction: column;
+}
+
+.flex-row-reverse {
+  flex-direction: row-reverse;
+}
+
+.flex-column-reverse {
+  flex-direction: column-reverse;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
+
+.justify-content-start {
+  justify-content: flex-start;
+}
+
+.justify-content-end {
+  justify-content: flex-end;
+}
+
+.justify-content-center {
+  justify-content: center;
+}
+
+.justify-content-between {
+  justify-content: space-between;
+}
+
+.justify-content-around {
+  justify-content: space-around;
+}
+
+.align-items-start {
+  align-items: flex-start;
+}
+
+.align-items-end {
+  align-items: flex-end;
+}
+
+.align-items-center {
+  align-items: center;
+}
+
+.align-items-baseline {
+  align-items: baseline;
+}
+
+.align-items-stretch {
+  align-items: stretch;
+}
+
+.align-self-start {
+  align-self: flex-start;
+}
+
+.align-self-end {
+  align-self: flex-end;
+}
+
+.align-self-center {
+  align-self: center;
+}
+
+.align-self-baseline {
+  align-self: baseline;
+}
+
+.align-self-stretch {
+  align-self: stretch;
+}

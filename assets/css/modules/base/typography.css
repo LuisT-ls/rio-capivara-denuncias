@@ -1,0 +1,263 @@
+/*
+ * Tipografia
+ * Estilos para texto, títulos, parágrafos, etc.
+ */
+
+/* Cabeçalhos */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-family-heading);
+  margin-bottom: var(--space-md);
+  line-height: var(--line-height-tight);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+h1,
+.h1 {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--space-lg);
+  letter-spacing: -0.5px;
+}
+
+h2,
+.h2 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-md);
+  letter-spacing: -0.3px;
+}
+
+h3,
+.h3 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-md);
+}
+
+h4,
+.h4 {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-sm);
+}
+
+h5,
+.h5 {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--space-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+h6,
+.h6 {
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--space-sm);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Display headings - para títulos grandes e chamativos */
+.display-1 {
+  font-size: var(--font-size-4xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.1;
+  letter-spacing: -1px;
+}
+
+.display-2 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  line-height: 1.2;
+  letter-spacing: -0.5px;
+}
+
+/* Parágrafos e texto */
+p {
+  margin-bottom: var(--space-md);
+  max-width: 65ch; /* Melhora a legibilidade de linhas longas */
+}
+
+.lead {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-normal);
+  line-height: var(--line-height-loose);
+  margin-bottom: var(--space-lg);
+}
+
+/* Classes de texto */
+.text-primary {
+  color: var(--color-primary) !important;
+}
+
+.text-secondary {
+  color: var(--color-secondary) !important;
+}
+
+.text-success {
+  color: var(--color-success) !important;
+}
+
+.text-danger,
+.text-error {
+  color: var(--color-error) !important;
+}
+
+.text-warning {
+  color: var(--color-warning) !important;
+}
+
+.text-info {
+  color: var(--color-info) !important;
+}
+
+.text-light {
+  color: var(--color-text-tertiary) !important;
+}
+
+.text-dark {
+  color: var(--color-text-primary) !important;
+}
+
+.text-muted {
+  color: var(--color-text-tertiary) !important;
+}
+
+/* Alinhamento de texto */
+.text-left {
+  text-align: left !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-justify {
+  text-align: justify !important;
+}
+
+/* Transformação de texto */
+.text-uppercase {
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px;
+}
+
+.text-lowercase {
+  text-transform: lowercase !important;
+}
+
+.text-capitalize {
+  text-transform: capitalize !important;
+}
+
+/* Estilo de fonte */
+.fw-light {
+  font-weight: var(--font-weight-light) !important;
+}
+
+.fw-normal {
+  font-weight: var(--font-weight-normal) !important;
+}
+
+.fw-medium {
+  font-weight: var(--font-weight-medium) !important;
+}
+
+.fw-semibold {
+  font-weight: var(--font-weight-semibold) !important;
+}
+
+.fw-bold {
+  font-weight: var(--font-weight-bold) !important;
+}
+
+/* Formatação especial */
+.text-truncate {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.text-decoration-none {
+  text-decoration: none !important;
+}
+
+.text-break {
+  word-wrap: break-word !important;
+  word-break: break-word !important;
+}
+
+/* Listas */
+ul,
+ol {
+  margin-bottom: var(--space-md);
+  padding-left: var(--space-lg);
+}
+
+li {
+  margin-bottom: var(--space-xs);
+}
+
+.list-unstyled {
+  list-style: none;
+  padding-left: 0;
+}
+
+.list-inline {
+  list-style: none;
+  padding-left: 0;
+}
+
+.list-inline-item {
+  display: inline-block;
+  margin-right: var(--space-sm);
+}
+
+/* Blockquotes e citações */
+blockquote {
+  padding: var(--space-md) var(--space-lg);
+  margin: var(--space-lg) 0;
+  border-left: 4px solid var(--color-primary);
+  background-color: var(--color-background-alt);
+  border-radius: var(--border-radius-sm);
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+/* Responsividade para tipografia */
+@media (max-width: 768px) {
+  h1,
+  .h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  h2,
+  .h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  h3,
+  .h3 {
+    font-size: var(--font-size-lg);
+  }
+
+  .display-1 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .display-2 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .lead {
+    font-size: var(--font-size-md);
+  }
+}

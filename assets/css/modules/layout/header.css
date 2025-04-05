@@ -1,0 +1,244 @@
+/*
+ * Estilos do Cabeçalho
+ * Barra de navegação, logo e menu
+ */
+
+.header {
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: var(--z-sticky);
+  transition: all var(--transition-normal);
+  padding: var(--space-sm) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Efeito de revelação ao scroll */
+.header-reveal {
+  transform: translateY(-100%);
+}
+
+.header-reveal.visible {
+  transform: translateY(0);
+}
+
+/* Header com fundo transparente (para uso sobre heróis) */
+.header-transparent {
+  background-color: transparent;
+  box-shadow: none;
+  border-bottom: none;
+  position: absolute;
+}
+
+.header-transparent .navbar-brand {
+  color: var(--color-white);
+}
+
+.header-transparent .navbar-nav .nav-link {
+  color: var(--color-white);
+}
+
+.header-transparent .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Cor de fundo quando o cabeçalho transparente tem scroll */
+.header-transparent.scrolled {
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header-transparent.scrolled .navbar-brand,
+.header-transparent.scrolled .navbar-nav .nav-link {
+  color: var(--color-text-primary);
+}
+
+.header-transparent.scrolled .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0, 0, 0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Logo */
+.navbar-brand {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-lg);
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  padding: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.navbar-brand:hover {
+  opacity: 0.9;
+}
+
+.navbar-brand img {
+  max-height: 40px;
+  margin-right: var(--space-sm);
+}
+
+/* Links de navegação */
+.navbar-nav {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav .nav-item {
+  margin: 0 var(--space-xs);
+  position: relative;
+}
+
+.navbar-nav .nav-link {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-medium);
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--border-radius-pill);
+  transition: color var(--transition-fast),
+    background-color var(--transition-fast);
+}
+
+.navbar-nav .nav-link:hover {
+  color: var(--color-primary);
+  background-color: var(--color-primary-transparent);
+}
+
+.navbar-nav .nav-link.active {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  position: relative;
+}
+
+.navbar-nav .nav-link.active::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: var(--space-md);
+  right: var(--space-md);
+  height: 2px;
+  background-color: var(--color-primary);
+  border-radius: var(--border-radius-pill);
+}
+
+/* Menu hamburguer */
+.navbar-toggler {
+  border: none;
+  padding: var(--space-xs);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.navbar-toggler:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.navbar-toggler-icon {
+  width: 1.5em;
+  height: 1.5em;
+  display: inline-block;
+  vertical-align: middle;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100%;
+}
+
+/* Botões no cabeçalho */
+.header .btn {
+  margin-left: var(--space-sm);
+}
+
+/* Estado compacto para cabeçalho (ativado com JavaScript em scroll) */
+.header-compact {
+  padding: var(--space-xs) 0;
+}
+
+.header-compact .navbar-brand img {
+  max-height: 32px;
+}
+
+/* Responsividade */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background-color: var(--color-surface);
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    padding: var(--space-md);
+    margin-top: var(--space-sm);
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .navbar-nav .nav-item {
+    margin: var(--space-xs) 0;
+  }
+
+  .navbar-nav .nav-link.active::after {
+    left: 0;
+    right: 0;
+  }
+
+  .header-transparent .navbar-collapse {
+    background-color: var(--color-surface);
+  }
+
+  .header-transparent .navbar-collapse .nav-link {
+    color: var(--color-text-primary);
+  }
+
+  .header .btn {
+    margin: var(--space-sm) 0 0 0;
+    width: 100%;
+  }
+}
+
+/* Animação para menu mobile */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    transform-origin: top;
+    animation: slideInDown 0.3s forwards;
+  }
+
+  .navbar-nav .nav-item {
+    opacity: 0;
+    animation: fadeIn 0.3s forwards;
+  }
+
+  .navbar-nav .nav-item:nth-child(1) {
+    animation-delay: 0.1s;
+  }
+  .navbar-nav .nav-item:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+  .navbar-nav .nav-item:nth-child(3) {
+    animation-delay: 0.2s;
+  }
+  .navbar-nav .nav-item:nth-child(4) {
+    animation-delay: 0.25s;
+  }
+  .navbar-nav .nav-item:nth-child(5) {
+    animation-delay: 0.3s;
+  }
+  .navbar-nav .nav-item:nth-child(6) {
+    animation-delay: 0.35s;
+  }
+}
+
+/* Modo escuro */
+.dark-mode .header {
+  background-color: var(--color-surface);
+  border-bottom-color: var(--color-border);
+}
+
+.dark-mode .header-transparent {
+  background-color: transparent;
+  border-bottom: none;
+}
+
+.dark-mode .header-transparent.scrolled {
+  background-color: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+}

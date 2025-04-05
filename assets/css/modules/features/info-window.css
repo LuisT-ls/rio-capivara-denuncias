@@ -1,0 +1,336 @@
+/*
+ * Estilos para InfoWindow
+ * Personalização das janelas de informação do mapa
+ */
+
+/* Conteúdo da infowindow */
+.info-window {
+  font-family: var(--font-family-body);
+  width: 280px;
+  max-width: 100%;
+  color: var(--color-text-primary);
+}
+
+/* Cabeçalho */
+.info-title {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-md);
+  margin-bottom: 10px;
+  color: var(--color-primary);
+  display: flex;
+  align-items: center;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.info-title i {
+  margin-right: 8px;
+  font-size: 1.2em;
+}
+
+/* Descrição */
+.info-desc {
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  margin-bottom: 12px;
+  color: var(--color-text-primary);
+  word-wrap: break-word;
+  max-height: 80px;
+  overflow-y: auto;
+}
+
+/* Imagem */
+.info-img {
+  width: 100%;
+  height: auto;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: var(--border-radius-sm);
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+  box-shadow: var(--shadow-sm);
+}
+
+.info-img:hover {
+  transform: scale(1.02);
+}
+
+/* Data e metadata */
+.info-metadata {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin-bottom: 10px;
+}
+
+.info-date {
+  display: flex;
+  align-items: center;
+}
+
+.info-date i {
+  margin-right: 4px;
+  font-size: 0.9em;
+}
+
+.info-author {
+  display: flex;
+  align-items: center;
+}
+
+.info-author i {
+  margin-right: 4px;
+  font-size: 0.9em;
+}
+
+/* Status */
+.info-status {
+  font-size: var(--font-size-xs);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+}
+
+.info-status .badge {
+  margin-left: 5px;
+}
+
+/* Status específicos */
+.badge.bg-pendente {
+  background-color: var(--color-warning);
+  color: #212121;
+}
+
+.badge.bg-analise {
+  background-color: var(--color-info);
+  color: #fff;
+}
+
+.badge.bg-aprovada {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.badge.bg-rejeitada {
+  background-color: var(--color-error);
+  color: #fff;
+}
+
+.badge.bg-resolvida {
+  background-color: var(--color-success);
+  color: #fff;
+}
+
+/* Ações */
+.info-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 12px;
+}
+
+.info-btn {
+  padding: 6px 12px;
+  font-size: var(--font-size-xs);
+  border-radius: var(--border-radius-sm);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+}
+
+.info-btn:hover {
+  transform: translateY(-2px);
+}
+
+.info-btn-outline {
+  background-color: transparent;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.info-btn-outline:hover {
+  background-color: var(--color-background-alt);
+}
+
+.info-btn-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+  border: none;
+}
+
+.info-btn-primary:hover {
+  background-color: var(--color-primary-dark);
+}
+
+/* Links */
+.info-window a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+.info-window a:hover {
+  color: var(--color-primary-dark);
+  text-decoration: underline;
+}
+
+/* Contador de apoios */
+.info-supports {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-bottom: 10px;
+}
+
+.info-supports i {
+  margin-right: 5px;
+  color: var(--color-primary);
+}
+
+.info-supports.supported i {
+  color: var(--color-primary);
+}
+
+.info-count {
+  font-weight: var(--font-weight-medium);
+  margin-left: 3px;
+}
+
+/* Localização */
+.info-location {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.info-location i {
+  margin-right: 5px;
+  color: var(--color-primary);
+}
+
+/* Compartilhar */
+.info-share {
+  display: flex;
+  margin-top: 10px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 10px;
+}
+
+.info-share-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: var(--color-background-alt);
+  color: var(--color-text-secondary);
+  margin-right: 8px;
+  transition: all var(--transition-fast);
+}
+
+.info-share-btn:hover {
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+  transform: translateY(-2px);
+}
+
+/* InfoWindow expandida para detalhes */
+.info-window-expanded {
+  width: 350px;
+}
+
+.info-window-expanded .info-desc {
+  max-height: 150px;
+}
+
+.info-window-expanded .info-img {
+  max-height: 200px;
+}
+
+/* Timeline de atualização */
+.info-timeline {
+  margin-top: 15px;
+  border-top: 1px solid var(--color-border);
+  padding-top: 15px;
+}
+
+.info-timeline-title {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
+  margin-bottom: 10px;
+}
+
+.info-timeline-item {
+  padding-left: 20px;
+  margin-bottom: 12px;
+  position: relative;
+  font-size: var(--font-size-xs);
+}
+
+.info-timeline-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-primary);
+}
+
+.info-timeline-item::after {
+  content: '';
+  position: absolute;
+  left: 5px;
+  top: 15px;
+  width: 1px;
+  height: calc(100% + 8px);
+  background-color: var(--color-border);
+}
+
+.info-timeline-item:last-child::after {
+  display: none;
+}
+
+.info-timeline-date {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin-bottom: 3px;
+}
+
+.info-timeline-text {
+  color: var(--color-text-secondary);
+}
+
+/* Modo escuro */
+.dark-mode .info-window {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .info-window .info-title {
+  color: var(--color-primary-light);
+  border-color: var(--color-border);
+}
+
+.dark-mode .info-window .info-btn-outline {
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.dark-mode .info-window .info-btn-outline:hover {
+  background-color: var(--color-background-alt);
+}
+
+.dark-mode .info-window .info-share {
+  border-color: var(--color-border);
+}
+
+.dark-mode .info-window .info-timeline {
+  border-color: var(--color-border);
+}

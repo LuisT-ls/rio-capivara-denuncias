@@ -1,0 +1,315 @@
+/*
+ * Estilos para seções de conteúdo
+ * Layouts padrão para as diferentes seções da aplicação
+ */
+
+/* Seção padrão */
+section {
+  padding: var(--space-2xl) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Espaçamentos de seção */
+section.py-sm {
+  padding-top: var(--space-lg);
+  padding-bottom: var(--space-lg);
+}
+
+section.py-lg {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+section.py-xl {
+  padding-top: var(--space-3xl);
+  padding-bottom: var(--space-3xl);
+}
+
+/* Seção com fundo alternativo */
+section.bg-alt {
+  background-color: var(--color-background-alt);
+}
+
+/* Seção com fundo primário */
+section.bg-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+
+section.bg-primary h1,
+section.bg-primary h2,
+section.bg-primary h3,
+section.bg-primary h4,
+section.bg-primary h5,
+section.bg-primary h6 {
+  color: var(--color-white);
+}
+
+/* Seção com fundo secundário */
+section.bg-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-text-on-secondary);
+}
+
+/* Seção Hero (banner principal) */
+.hero {
+  padding: var(--space-3xl) 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+}
+
+/* Overlay para heróis com imagem de fundo */
+.hero-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
+  z-index: 1;
+}
+
+.hero-overlay {
+  color: var(--color-white);
+}
+
+.hero-overlay h1,
+.hero-overlay h2,
+.hero-overlay p {
+  color: var(--color-white);
+}
+
+/* Hero com formas decorativas */
+.hero-shape {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-shape::after {
+  content: '';
+  position: absolute;
+  bottom: -10%;
+  left: -5%;
+  right: -5%;
+  height: 30%;
+  background-color: var(--color-background);
+  transform: rotate(-3deg);
+  z-index: 1;
+}
+
+/* Títulos de seção */
+.section-title {
+  margin-bottom: var(--space-xl);
+  position: relative;
+  text-align: center;
+}
+
+.section-title h2 {
+  margin-bottom: var(--space-sm);
+  position: relative;
+  display: inline-block;
+}
+
+.section-title h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50px;
+  height: 3px;
+  background-color: var(--color-primary);
+  border-radius: var(--border-radius-pill);
+}
+
+.section-title p {
+  color: var(--color-text-secondary);
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Títulos de seção alinhados à esquerda */
+.section-title-left {
+  text-align: left;
+  margin-bottom: var(--space-lg);
+}
+
+.section-title-left h2 {
+  margin-bottom: var(--space-sm);
+}
+
+.section-title-left h2::after {
+  left: 0;
+  transform: none;
+}
+
+/* Divider (separador) */
+.divider {
+  height: 1px;
+  background-color: var(--color-border);
+  margin: var(--space-lg) 0;
+}
+
+.divider-sm {
+  margin: var(--space-md) 0;
+}
+
+.divider-lg {
+  margin: var(--space-xl) 0;
+}
+
+.divider-center {
+  position: relative;
+}
+
+.divider-center::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-background);
+  border-radius: var(--border-radius-circle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Elementos de fundo decorativos */
+.bg-dots {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  opacity: 0.1;
+  background-image: radial-gradient(var(--color-primary) 2px, transparent 2px);
+  background-size: 20px 20px;
+}
+
+.bg-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' opacity='.25' fill='%23FFFFFF'/%3E%3Cpath d='M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z' opacity='.5' fill='%23FFFFFF'/%3E%3C/svg%3E");
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* Seção destacada com borda */
+.section-bordered {
+  border: 1px solid var(--color-border);
+  border-radius: var(--border-radius-lg);
+  padding: var(--space-xl);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Animações para elementos entrando na viewport */
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  section {
+    padding: var(--space-xl) 0;
+  }
+
+  section.py-lg,
+  section.py-xl {
+    padding-top: var(--space-xl);
+    padding-bottom: var(--space-xl);
+  }
+
+  .section-title h2 {
+    font-size: var(--font-size-xl);
+  }
+
+  .section-title h2::after {
+    bottom: -8px;
+    width: 40px;
+    height: 2px;
+  }
+
+  .hero {
+    padding: var(--space-xl) 0;
+  }
+
+  .section-bordered {
+    padding: var(--space-lg);
+  }
+}
+
+/* Seção de recursos (features) */
+.features-section {
+  position: relative;
+}
+
+.feature-card {
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-md);
+  padding: var(--space-lg);
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--transition-normal),
+    box-shadow var(--transition-normal);
+  margin-bottom: var(--space-lg);
+  height: 100%;
+  border: 1px solid transparent;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-primary-transparent);
+}
+
+.feature-icon {
+  margin-bottom: var(--space-md);
+  color: var(--color-primary);
+  font-size: 2.5rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-primary-transparent);
+  border-radius: var(--border-radius-circle);
+}
+
+/* Modo escuro */
+.dark-mode .section-bordered {
+  border-color: var(--color-border);
+  background-color: var(--color-surface);
+}
+
+.dark-mode .feature-card {
+  background-color: var(--color-surface);
+}
+
+.dark-mode .section.bg-alt {
+  background-color: var(--color-background-alt);
+}

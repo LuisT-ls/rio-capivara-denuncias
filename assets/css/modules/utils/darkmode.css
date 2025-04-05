@@ -1,0 +1,266 @@
+/*
+ * Estilos do Modo Escuro
+ * Configurações específicas para o tema escuro
+ */
+
+/* Aplicação do modo escuro */
+.dark-mode {
+  color-scheme: dark;
+}
+
+/* Ajustes globais */
+.dark-mode body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+/* Superfícies e fundos */
+.dark-mode .bg-light {
+  background-color: var(--color-background-alt) !important;
+}
+
+.dark-mode .bg-white {
+  background-color: var(--color-surface) !important;
+}
+
+.dark-mode .text-dark {
+  color: var(--color-text-primary) !important;
+}
+
+/* Cartões e contêineres */
+.dark-mode .card {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.dark-mode .modal-content {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.dark-mode .card-header,
+.dark-mode .modal-header,
+.dark-mode .modal-footer {
+  border-color: var(--color-border);
+}
+
+/* Formulários e inputs */
+.dark-mode .form-control,
+.dark-mode .form-select {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.dark-mode .form-control:focus,
+.dark-mode .form-select:focus {
+  background-color: var(--color-surface);
+  border-color: var(--color-primary-light);
+}
+
+.dark-mode .form-control::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.dark-mode .input-group-text {
+  background-color: var(--color-background-alt);
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .form-check-input {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.dark-mode .form-select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath fill='none' stroke='%23adb5bd' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3E%3C/svg%3E");
+}
+
+/* Botões e ações */
+.dark-mode .btn-light {
+  background-color: rgba(255, 255, 255, 0.1);
+  border-color: transparent;
+  color: var(--color-text-primary);
+}
+
+.dark-mode .btn-light:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: var(--color-text-primary);
+}
+
+.dark-mode .btn-outline-dark {
+  border-color: var(--color-text-primary);
+  color: var(--color-text-primary);
+}
+
+.dark-mode .btn-outline-dark:hover {
+  background-color: var(--color-text-primary);
+  color: var(--color-background);
+}
+
+.dark-mode .btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
+
+/* Tabelas */
+.dark-mode .table {
+  color: var(--color-text-primary);
+  border-color: var(--color-border);
+}
+
+.dark-mode .table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode .table th,
+.dark-mode .table td {
+  border-color: var(--color-border);
+}
+
+.dark-mode .table thead th {
+  border-bottom-color: var(--color-border);
+}
+
+/* Dropdown e menus */
+.dark-mode .dropdown-menu {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-lg);
+}
+
+.dark-mode .dropdown-item {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .dropdown-item:hover,
+.dark-mode .dropdown-item:focus {
+  background-color: var(--color-background-alt);
+  color: var(--color-primary);
+}
+
+.dark-mode .dropdown-divider {
+  border-color: var(--color-border);
+}
+
+/* Navegação */
+.dark-mode .navbar-light {
+  background-color: var(--color-surface);
+}
+
+.dark-mode .navbar-light .navbar-brand,
+.dark-mode .navbar-light .navbar-nav .nav-link {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .navbar-light .navbar-nav .nav-link:hover,
+.dark-mode .navbar-light .navbar-nav .nav-link:focus {
+  color: var(--color-primary);
+}
+
+.dark-mode .navbar-light .navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3E%3Cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+
+/* Listagens */
+.dark-mode .list-group-item {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text-primary);
+}
+
+.dark-mode .list-group-item-action:hover,
+.dark-mode .list-group-item-action:focus {
+  background-color: var(--color-background-alt);
+  color: var(--color-text-primary);
+}
+
+/* Alertas e notificações */
+.dark-mode .alert {
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .alert-primary {
+  background-color: rgba(var(--color-primary-rgb), 0.2);
+  color: var(--color-primary-light);
+}
+
+.dark-mode .alert-success {
+  background-color: rgba(var(--color-success-rgb), 0.2);
+  color: var(--color-success-light);
+}
+
+.dark-mode .alert-danger {
+  background-color: rgba(var(--color-error-rgb), 0.2);
+  color: var(--color-error-light);
+}
+
+.dark-mode .alert-warning {
+  background-color: rgba(var(--color-warning-rgb), 0.2);
+  color: var(--color-warning-light);
+}
+
+.dark-mode .alert-info {
+  background-color: rgba(var(--color-info-rgb), 0.2);
+  color: var(--color-info-light);
+}
+
+/* Badges */
+.dark-mode .badge.bg-light {
+  background-color: rgba(255, 255, 255, 0.2) !important;
+  color: var(--color-text-primary);
+}
+
+.dark-mode .badge.bg-dark {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  color: var(--color-white);
+}
+
+/* Bordas e separadores */
+.dark-mode .border,
+.dark-mode .border-top,
+.dark-mode .border-end,
+.dark-mode .border-bottom,
+.dark-mode .border-start {
+  border-color: var(--color-border) !important;
+}
+
+.dark-mode hr {
+  border-color: var(--color-border);
+  opacity: 0.3;
+}
+
+/* Links */
+.dark-mode a:not(.btn):not(.nav-link) {
+  color: var(--color-primary-light);
+}
+
+.dark-mode a:not(.btn):not(.nav-link):hover {
+  color: var(--color-primary);
+}
+
+/* Scrollbar */
+.dark-mode::-webkit-scrollbar-track {
+  background: var(--color-background);
+}
+
+.dark-mode::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border: 3px solid var(--color-background);
+}
+
+.dark-mode::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Sobrescrever filtros para SVG e imagens */
+.dark-mode img[src$='.svg'],
+.dark-mode .icon-svg {
+  filter: brightness(0.85) contrast(1.2);
+}
+
+/* Transição suave para modo escuro */
+body.light-to-dark * {
+  transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease, box-shadow 0.3s ease;
+}

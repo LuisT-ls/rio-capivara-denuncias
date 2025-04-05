@@ -1,0 +1,375 @@
+/*
+ * Estilos para o Mapa
+ * Personalização de mapas, marcadores e elementos relacionados
+ */
+
+/* Container do mapa principal */
+.map-container {
+  width: 100%;
+  height: var(--map-height);
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--color-border);
+}
+
+/* Mapa de seleção (para formulário de denúncia) */
+#selecionarMapaContainer {
+  width: 100%;
+  height: var(--map-selection-height);
+  border-radius: var(--border-radius-md);
+  margin-bottom: var(--space-md);
+}
+
+/* Controles do mapa */
+.map-controls {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+}
+
+.map-control-button {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 8px;
+  border-radius: var(--border-radius-circle);
+  background-color: var(--color-surface);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.map-control-button:hover {
+  background-color: var(--color-background-alt);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.map-control-button i {
+  color: var(--color-text-primary);
+  font-size: 1.125rem;
+}
+
+/* Filtros de mapa */
+.map-filters {
+  margin-bottom: var(--space-md);
+}
+
+.map-filters .btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.map-filters .btn {
+  border-radius: var(--border-radius-pill);
+  padding: 0.5rem 1rem;
+  font-size: var(--font-size-sm);
+  transition: all var(--transition-fast);
+}
+
+/* Estados para os filtros */
+.map-filters .btn.active {
+  box-shadow: var(--shadow-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.map-filters .btn[data-filter='all'].active {
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+
+.map-filters .btn[data-filter='desmatamento'].active {
+  background-color: var(--color-success);
+  border-color: var(--color-success);
+  color: #fff;
+}
+
+.map-filters .btn[data-filter='despejo'].active {
+  background-color: var(--color-error);
+  border-color: var(--color-error);
+  color: #fff;
+}
+
+.map-filters .btn[data-filter='poluicao'].active {
+  background-color: var(--color-info);
+  border-color: var(--color-info);
+  color: #fff;
+}
+
+.map-filters .btn[data-filter='outros'].active {
+  background-color: var(--color-warning);
+  border-color: var(--color-warning);
+  color: #212121;
+}
+
+/* Personalização da infowindow do Google Maps */
+.gm-style .gm-style-iw-c {
+  padding: 12px !important;
+  border-radius: var(--border-radius-md) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.gm-style .gm-style-iw-d {
+  overflow: hidden !important;
+  padding: 0 !important;
+}
+
+.gm-style .gm-style-iw-t::after {
+  background: linear-gradient(
+    45deg,
+    var(--color-surface) 50%,
+    rgba(255, 255, 255, 0) 51%,
+    rgba(255, 255, 255, 0) 100%
+  ) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.gm-style .gm-ui-hover-effect {
+  top: 0 !important;
+  right: 0 !important;
+  opacity: 0.7 !important;
+}
+
+.gm-style .gm-ui-hover-effect:hover {
+  opacity: 1 !important;
+}
+
+/* Conteúdo da infowindow */
+.info-window {
+  font-family: var(--font-family-body);
+  width: 250px;
+  max-width: 100%;
+}
+
+.info-title {
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-md);
+  margin-bottom: 8px;
+  color: var(--color-primary);
+}
+
+.info-desc {
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  margin-bottom: 8px;
+  color: var(--color-text-primary);
+}
+
+.info-img {
+  width: 100%;
+  height: auto;
+  max-height: 150px;
+  object-fit: cover;
+  border-radius: var(--border-radius-sm);
+  margin-bottom: 8px;
+}
+
+.info-date {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-tertiary);
+  margin-bottom: 8px;
+}
+
+.info-status {
+  font-size: var(--font-size-xs);
+  margin-bottom: 12px;
+}
+
+/* Marcadores customizados */
+.custom-marker {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  position: relative;
+}
+
+.custom-marker-circle {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s ease;
+}
+
+.custom-marker-circle::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid var(--color-primary);
+}
+
+.custom-marker:hover .custom-marker-circle {
+  transform: scale(1.1);
+}
+
+/* Tipos de marcadores customizados */
+.custom-marker-desmatamento .custom-marker-circle {
+  background-color: var(--color-success);
+}
+
+.custom-marker-desmatamento .custom-marker-circle::after {
+  border-top-color: var(--color-success);
+}
+
+.custom-marker-despejo .custom-marker-circle {
+  background-color: var(--color-error);
+}
+
+.custom-marker-despejo .custom-marker-circle::after {
+  border-top-color: var(--color-error);
+}
+
+.custom-marker-poluicao .custom-marker-circle {
+  background-color: var(--color-info);
+}
+
+.custom-marker-poluicao .custom-marker-circle::after {
+  border-top-color: var(--color-info);
+}
+
+.custom-marker-outros .custom-marker-circle {
+  background-color: var(--color-warning);
+}
+
+.custom-marker-outros .custom-marker-circle::after {
+  border-top-color: var(--color-warning);
+}
+
+/* Cluster de marcadores */
+.marker-cluster {
+  background-color: rgba(var(--color-primary-rgb), 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: var(--font-weight-bold);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Indicador de carregamento do mapa */
+#mapLoadingIndicator {
+  z-index: 5;
+  padding: 0.75rem 1.5rem !important;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+}
+
+/* Legend do mapa */
+.map-legend {
+  position: absolute;
+  bottom: 30px;
+  left: 10px;
+  z-index: 5;
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-md);
+  padding: 10px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border);
+  font-size: var(--font-size-sm);
+  max-width: 200px;
+}
+
+.map-legend-title {
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: 8px;
+  font-size: var(--font-size-sm);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.legend-color {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
+.legend-desmatamento {
+  background-color: var(--color-success);
+}
+
+.legend-despejo {
+  background-color: var(--color-error);
+}
+
+.legend-poluicao {
+  background-color: var(--color-info);
+}
+
+.legend-outros {
+  background-color: var(--color-warning);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .map-container {
+    height: 350px;
+  }
+
+  #selecionarMapaContainer {
+    height: 250px;
+  }
+
+  .map-filters .btn {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.8rem;
+  }
+
+  .map-legend {
+    bottom: 10px;
+    padding: 8px;
+    max-width: 160px;
+  }
+
+  .info-window {
+    width: 200px;
+  }
+}
+
+/* Modo escuro */
+.dark-mode .map-container {
+  border-color: var(--color-border);
+}
+
+.dark-mode .map-control-button {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.dark-mode .map-legend {
+  background-color: var(--color-surface);
+  border-color: var(--color-border);
+}
+
+.dark-mode #mapLoadingIndicator {
+  background-color: var(--color-surface);
+  color: var(--color-text-primary);
+}

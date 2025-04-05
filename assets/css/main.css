@@ -1,0 +1,42 @@
+/* 
+ * Rio Capivara - Denúncias Ambientais
+ * CSS Principal - Importa todos os módulos
+ */
+
+/* Base */
+@import url('./modules/base/variables.css');
+@import url('./modules/base/var-darkmode.css');
+@import url('./modules/base/reset.css');
+@import url('./modules/base/typography.css');
+@import url('./modules/base/scrollbar.css');
+@import url('./modules/base/animations.css');
+
+/* Layout */
+@import url('./modules/layout/container.css');
+@import url('./modules/layout/header.css');
+@import url('./modules/layout/section.css');
+@import url('./modules/layout/footer.css');
+
+/* Components */
+@import url('./modules/components/buttons.css');
+@import url('./modules/components/inputs.css');
+@import url('./modules/components/modal.css');
+@import url('./modules/components/notification.css');
+@import url('./modules/components/theme-toggle.css');
+@import url('./modules/components/icon.css');
+@import url('./modules/components/flags.css');
+
+/* Features */
+@import url('./modules/features/map.css');
+@import url('./modules/features/denuncia-form.css');
+@import url('./modules/features/info-window.css');
+
+/* Utils */
+@import url('./modules/utils/spacing.css');
+@import url('./modules/utils/accessibility.css');
+@import url('./modules/utils/responsive.css');
+@import url('./modules/utils/darkmode.css');
+@import url('./modules/utils/tooltip.css');
+
+/* Fontes */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Open+Sans:wght@300;400;600&display=swap');

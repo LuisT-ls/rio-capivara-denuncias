@@ -1,0 +1,315 @@
+/*
+ * Estilos para Ícones
+ * Personalização de tamanhos, cores e animações para ícones
+ */
+
+/* Tamanhos de ícones */
+.icon-xs {
+  font-size: 0.75rem;
+}
+
+.icon-sm {
+  font-size: 0.875rem;
+}
+
+.icon-md {
+  font-size: 1.25rem;
+}
+
+.icon-lg {
+  font-size: 1.5rem;
+}
+
+.icon-xl {
+  font-size: 2rem;
+}
+
+.icon-2xl {
+  font-size: 2.5rem;
+}
+
+.icon-3xl {
+  font-size: 3rem;
+}
+
+/* Cores de ícones */
+.icon-primary {
+  color: var(--color-primary);
+}
+
+.icon-secondary {
+  color: var(--color-secondary);
+}
+
+.icon-success {
+  color: var(--color-success);
+}
+
+.icon-danger {
+  color: var(--color-error);
+}
+
+.icon-warning {
+  color: var(--color-warning);
+}
+
+.icon-info {
+  color: var(--color-info);
+}
+
+.icon-light {
+  color: #f8f9fa;
+}
+
+.icon-dark {
+  color: #212121;
+}
+
+.icon-muted {
+  color: var(--color-text-tertiary);
+}
+
+/* Ícones com círculo */
+.icon-circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: var(--color-background-alt);
+}
+
+.icon-circle.icon-primary {
+  background-color: rgba(var(--color-primary-rgb), 0.1);
+  color: var(--color-primary);
+}
+
+.icon-circle.icon-secondary {
+  background-color: rgba(var(--color-secondary-rgb), 0.1);
+  color: var(--color-secondary);
+}
+
+.icon-circle.icon-success {
+  background-color: rgba(var(--color-success-rgb), 0.1);
+  color: var(--color-success);
+}
+
+.icon-circle.icon-danger {
+  background-color: rgba(var(--color-error-rgb), 0.1);
+  color: var(--color-error);
+}
+
+.icon-circle.icon-warning {
+  background-color: rgba(var(--color-warning-rgb), 0.1);
+  color: var(--color-warning);
+}
+
+.icon-circle.icon-info {
+  background-color: rgba(var(--color-info-rgb), 0.1);
+  color: var(--color-info);
+}
+
+/* Tamanhos de círculos */
+.icon-circle.icon-circle-sm {
+  width: 1.5rem;
+  height: 1.5rem;
+  font-size: 0.75rem;
+}
+
+.icon-circle.icon-circle-lg {
+  width: 3rem;
+  height: 3rem;
+  font-size: 1.5rem;
+}
+
+.icon-circle.icon-circle-xl {
+  width: 4rem;
+  height: 4rem;
+  font-size: 2rem;
+}
+
+/* Ícones com bordas */
+.icon-bordered {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+}
+
+.icon-bordered.icon-bordered-sm {
+  width: 2rem;
+  height: 2rem;
+  border-width: 1px;
+  font-size: 0.875rem;
+}
+
+.icon-bordered.icon-bordered-lg {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-width: 2px;
+  font-size: 1.75rem;
+}
+
+/* Animações de ícones */
+.icon-spin {
+  animation: spin 2s linear infinite;
+}
+
+.icon-pulse {
+  animation: spin 1s steps(8) infinite;
+}
+
+.icon-beat {
+  animation: beat 1s ease infinite;
+}
+
+.icon-fade {
+  animation: fade 1.5s ease infinite;
+}
+
+.icon-bounce {
+  animation: bounce 1s ease infinite;
+}
+
+@keyframes beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Ícones para marcadores no mapa */
+.map-marker-icon {
+  font-size: 1.5rem;
+  color: var(--color-primary);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.3));
+}
+
+.map-marker-icon.icon-desmatamento {
+  color: #4caf50;
+}
+
+.map-marker-icon.icon-despejo {
+  color: #f44336;
+}
+
+.map-marker-icon.icon-poluicao {
+  color: #3f51b5;
+}
+
+.map-marker-icon.icon-outros {
+  color: #ff9800;
+}
+
+/* Ícones de status para denúncias */
+.status-icon {
+  display: inline-flex;
+  position: relative;
+}
+
+.status-icon::after {
+  content: '';
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--color-success);
+  right: -3px;
+  top: -3px;
+  border: 2px solid var(--color-surface);
+}
+
+.status-icon.status-pending::after {
+  background-color: var(--color-warning);
+}
+
+.status-icon.status-rejected::after {
+  background-color: var(--color-error);
+}
+
+.status-icon.status-processing::after {
+  background-color: var(--color-info);
+}
+
+/* Ícones com badge */
+.icon-badge {
+  position: relative;
+  display: inline-flex;
+}
+
+.icon-badge .badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 18px;
+  height: 18px;
+  font-size: 0.65rem;
+  font-weight: var(--font-weight-bold);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--color-surface);
+  padding: 0 4px;
+}
+
+/* Grupo de ícones */
+.icon-group {
+  display: flex;
+}
+
+.icon-group > * {
+  margin-right: -0.5rem;
+  border: 2px solid var(--color-surface);
+  border-radius: 50%;
+}
+
+.icon-group > *:last-child {
+  margin-right: 0;
+}
+
+/* Ícones responsivos */
+@media (max-width: 768px) {
+  .icon-3xl {
+    font-size: 2.5rem;
+  }
+
+  .icon-2xl {
+    font-size: 2rem;
+  }
+
+  .icon-xl {
+    font-size: 1.75rem;
+  }
+
+  .icon-circle.icon-circle-xl {
+    width: 3.5rem;
+    height: 3.5rem;
+    font-size: 1.75rem;
+  }
+}
+
+/* Modo escuro */
+.dark-mode
+  .icon-circle:not(.icon-primary):not(.icon-secondary):not(.icon-success):not(
+    .icon-danger
+  ):not(.icon-warning):not(.icon-info) {
+  background-color: rgba(255, 255, 255, 0.1);
+}

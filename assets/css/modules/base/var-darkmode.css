@@ -1,0 +1,62 @@
+/*
+ * Variáveis para o Modo Escuro
+ * Sobrescreve as variáveis principais quando o modo escuro está ativado
+ */
+
+.dark-mode {
+  /* Cores de Fundo */
+  --color-background: #121212;
+  --color-background-alt: #1f1f1f;
+  --color-surface: #242424;
+  --color-border: #333333;
+
+  /* Cores de Texto */
+  --color-text-primary: #e0e0e0;
+  --color-text-secondary: #b0b0b0;
+  --color-text-tertiary: #777777;
+
+  /* Cores Primárias (versões mais vibrantes para melhor contraste) */
+  --color-primary: #4db6ac;
+  --color-primary-light: #6ec6c1;
+  --color-primary-dark: #009688;
+  --color-primary-transparent: rgba(77, 182, 172, 0.15);
+
+  /* Cores Secundárias (mais vibrante para melhor contraste) */
+  --color-secondary: #66bb6a;
+  --color-secondary-light: #88cc8c;
+  --color-secondary-dark: #43a047;
+  --color-secondary-transparent: rgba(102, 187, 106, 0.15);
+
+  /* Cores de Estado - mais vivas para melhor contraste */
+  --color-success: #4caf50;
+  --color-success-light: #81c784;
+  --color-success-dark: #388e3c;
+
+  --color-warning: #ffc107;
+  --color-warning-light: #ffdb58;
+  --color-warning-dark: #e6ac00;
+
+  --color-error: #f44336;
+  --color-error-light: #ff7961;
+  --color-error-dark: #d32f2f;
+
+  --color-info: #29b6f6;
+  --color-info-light: #73e8ff;
+  --color-info-dark: #0288d1;
+
+  /* Sombras - mais sutis no modo escuro */
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.36);
+  --shadow-md: 0 3px 6px rgba(0, 0, 0, 0.4), 0 3px 6px rgba(0, 0, 0, 0.46);
+  --shadow-lg: 0 10px 20px rgba(0, 0, 0, 0.5), 0 6px 6px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 14px 28px rgba(0, 0, 0, 0.6), 0 10px 10px rgba(0, 0, 0, 0.52);
+}
+
+/* Imagens e ícones para o modo escuro */
+.dark-mode img:not([src*='.svg']) {
+  filter: brightness(0.9);
+}
+
+/* Personalização para mapas no modo escuro */
+.dark-mode .map-container {
+  filter: brightness(0.85) contrast(1.1);
+}

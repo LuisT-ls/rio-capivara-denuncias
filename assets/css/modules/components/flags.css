@@ -1,0 +1,331 @@
+/*
+ * Estilos para Badges e Flags
+ * Indicadores visuais, etiquetas e marcadores de status
+ */
+
+/* Badges básicos */
+.badge {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: var(--border-radius-pill);
+  background-color: var(--color-background-alt);
+  color: var(--color-text-primary);
+}
+
+/* Variações de cores */
+.badge-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+
+.badge-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-text-on-secondary);
+}
+
+.badge-success {
+  background-color: var(--color-success);
+  color: #fff;
+}
+
+.badge-danger {
+  background-color: var(--color-error);
+  color: #fff;
+}
+
+.badge-warning {
+  background-color: var(--color-warning);
+  color: #212121;
+}
+
+.badge-info {
+  background-color: var(--color-info);
+  color: #fff;
+}
+
+.badge-light {
+  background-color: #f8f9fa;
+  color: #212121;
+}
+
+.badge-dark {
+  background-color: #212121;
+  color: #fff;
+}
+
+/* Badges outline */
+.badge-outline-primary {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.badge-outline-secondary {
+  background-color: transparent;
+  color: var(--color-secondary);
+  border: 1px solid var(--color-secondary);
+}
+
+.badge-outline-success {
+  background-color: transparent;
+  color: var(--color-success);
+  border: 1px solid var(--color-success);
+}
+
+.badge-outline-danger {
+  background-color: transparent;
+  color: var(--color-error);
+  border: 1px solid var(--color-error);
+}
+
+.badge-outline-warning {
+  background-color: transparent;
+  color: var(--color-warning);
+  border: 1px solid var(--color-warning);
+}
+
+.badge-outline-info {
+  background-color: transparent;
+  color: var(--color-info);
+  border: 1px solid var(--color-info);
+}
+
+/* Tamanhos de badges */
+.badge-sm {
+  padding: 0.125rem 0.4rem;
+  font-size: 0.7rem;
+}
+
+.badge-lg {
+  padding: 0.35rem 0.7rem;
+  font-size: 0.85rem;
+}
+
+/* Badges com ícones */
+.badge-icon {
+  display: inline-flex;
+  align-items: center;
+}
+
+.badge-icon i {
+  margin-right: 0.25rem;
+}
+
+.badge-icon.icon-right i {
+  margin-right: 0;
+  margin-left: 0.25rem;
+}
+
+/* Badge posicionado */
+.badge-positioned {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translate(50%, -50%);
+}
+
+/* Badges para status especiais */
+.badge-status {
+  position: relative;
+  padding-left: 1.75rem;
+}
+
+.badge-status::before {
+  content: '';
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: currentColor;
+  left: 0.5rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Tags */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.35rem 0.75rem;
+  margin: 0.25rem;
+  border-radius: var(--border-radius-pill);
+  background-color: var(--color-background-alt);
+  font-size: 0.85rem;
+  line-height: 1;
+  color: var(--color-text-primary);
+  cursor: default;
+  user-select: none;
+}
+
+.tag-primary {
+  background-color: rgba(var(--color-primary-rgb), 0.15);
+  color: var(--color-primary-dark);
+}
+
+.tag-secondary {
+  background-color: rgba(var(--color-secondary-rgb), 0.15);
+  color: var(--color-secondary-dark);
+}
+
+.tag-success {
+  background-color: rgba(var(--color-success-rgb), 0.15);
+  color: var(--color-success-dark);
+}
+
+.tag-danger {
+  background-color: rgba(var(--color-error-rgb), 0.15);
+  color: var(--color-error-dark);
+}
+
+.tag-warning {
+  background-color: rgba(var(--color-warning-rgb), 0.15);
+  color: var(--color-warning-dark);
+}
+
+.tag-info {
+  background-color: rgba(var(--color-info-rgb), 0.15);
+  color: var(--color-info-dark);
+}
+
+/* Tag com botão de remover */
+.tag-dismissible {
+  padding-right: 0.5rem;
+}
+
+.tag-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0.5rem;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition: background-color var(--transition-fast);
+}
+
+.tag-remove:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+/* Bandeira de status */
+.status-flag {
+  position: absolute;
+  top: 1rem;
+  right: -0.25rem;
+  padding: 0.25rem 1rem 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+  z-index: 1;
+  box-shadow: var(--shadow-sm);
+}
+
+.status-flag::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0.25rem 0.25rem 0;
+  border-color: transparent var(--color-primary-dark) transparent transparent;
+}
+
+.status-flag-success {
+  background-color: var(--color-success);
+}
+
+.status-flag-success::before {
+  border-color: transparent var(--color-success-dark) transparent transparent;
+}
+
+.status-flag-danger {
+  background-color: var(--color-error);
+}
+
+.status-flag-danger::before {
+  border-color: transparent var(--color-error-dark) transparent transparent;
+}
+
+.status-flag-warning {
+  background-color: var(--color-warning);
+  color: #212121;
+}
+
+.status-flag-warning::before {
+  border-color: transparent var(--color-warning-dark) transparent transparent;
+}
+
+/* Marcador de canto */
+.corner-ribbon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 150px;
+  height: 22px;
+  margin-top: 30px;
+  transform: rotate(45deg) translateX(40px);
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+  text-align: center;
+  line-height: 22px;
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-bold);
+  box-shadow: var(--shadow-sm);
+  z-index: 1;
+}
+
+/* Indicador de estado de processamento */
+.progress-flag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--border-radius-pill);
+  background-color: var(--color-info);
+  color: #fff;
+}
+
+.progress-flag::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 0.5rem;
+  border-radius: 50%;
+  background-color: #fff;
+  animation: pulse 1.5s infinite;
+}
+
+/* Modo escuro */
+.dark-mode .badge {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .badge-light {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #f8f9fa;
+}
+
+.dark-mode .tag {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .tag-remove {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.dark-mode .tag-remove:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}

@@ -1,0 +1,253 @@
+/*
+ * Estilos de Acessibilidade
+ * Classes e utilitários para melhorar a acessibilidade
+ */
+
+/* Contorno de foco acessível */
+:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Skip links para navegação com teclado */
+.skip-link {
+  position: absolute;
+  top: -9999px;
+  left: -9999px;
+  z-index: var(--z-toast);
+  padding: 0.75rem 1.25rem;
+  background-color: var(--color-surface);
+  color: var(--color-primary);
+  text-decoration: none;
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  transition: none;
+}
+
+.skip-link:focus {
+  top: 8px;
+  left: 8px;
+}
+
+/* Texto escondido visualmente mas acessível para leitores de tela */
+.visually-hidden,
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.visually-hidden:focus,
+.sr-only:focus {
+  position: static;
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip: auto;
+  white-space: normal;
+}
+
+/* Ocultar apenas visualmente (manter acessível para leitores de tela) */
+.sr-only-focusable:not(:focus) {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Melhorar legibilidade para texto sobre imagens/fundos escuros */
+.text-shadow {
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+}
+
+/* Remoção de animações para usuários que preferem reduzir o movimento */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-fadeIn,
+  .animate-fadeInUp,
+  .animate-fadeInDown,
+  .animate-pulse,
+  .animate-bounce,
+  .animate-slideInRight,
+  .animate-slideInLeft,
+  .animate-spin,
+  .animate-shake,
+  .animate-dropIn {
+    animation: none !important;
+    transition: none !important;
+  }
+
+  .card:hover,
+  .feature-card:hover,
+  .btn:hover {
+    transform: none !important;
+  }
+}
+
+/* Alto contraste */
+.high-contrast {
+  --color-primary: #0066cc;
+  --color-primary-light: #0077ee;
+  --color-primary-dark: #004499;
+
+  --color-text-primary: #000000;
+  --color-text-secondary: #333333;
+  --color-text-tertiary: #666666;
+
+  --color-surface: #ffffff;
+  --color-background: #ffffff;
+  --color-background-alt: #f0f0f0;
+  --color-border: #000000;
+
+  --color-success: #006600;
+  --color-error: #cc0000;
+  --color-warning: #cc6600;
+  --color-info: #0066cc;
+}
+
+.high-contrast.dark-mode {
+  --color-primary: #66aaff;
+  --color-primary-light: #88bbff;
+  --color-primary-dark: #4488ee;
+
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #dddddd;
+  --color-text-tertiary: #aaaaaa;
+
+  --color-surface: #121212;
+  --color-background: #000000;
+  --color-background-alt: #222222;
+  --color-border: #ffffff;
+
+  --color-success: #00cc00;
+  --color-error: #ff4444;
+  --color-warning: #ffaa00;
+  --color-info: #44aaff;
+}
+
+/* Tamanho de fonte maior para melhor legibilidade */
+.larger-text {
+  font-size: 1.2em;
+}
+
+.larger-text h1 {
+  font-size: 2.4em;
+}
+
+.larger-text h2 {
+  font-size: 2em;
+}
+
+.larger-text h3 {
+  font-size: 1.8em;
+}
+
+.larger-text p,
+.larger-text li,
+.larger-text label,
+.larger-text input,
+.larger-text button {
+  font-size: 1.2em;
+}
+
+/* Espaçamento para telas de toque */
+@media (pointer: coarse) {
+  .touch-friendly a,
+  .touch-friendly button,
+  .touch-friendly .btn,
+  .touch-friendly input[type='checkbox'],
+  .touch-friendly input[type='radio'],
+  .touch-friendly .form-control {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  .touch-friendly label {
+    display: inline-block;
+    padding: 8px 0;
+  }
+}
+
+/* Indicadores de foco personalizado */
+.focus-outline-primary:focus {
+  outline-color: var(--color-primary);
+}
+
+.focus-outline-light:focus {
+  outline-color: rgba(255, 255, 255, 0.7);
+}
+
+.focus-outline-dark:focus {
+  outline-color: rgba(0, 0, 0, 0.7);
+}
+
+/* Status ARIA para atualizações dinâmicas */
+[aria-busy='true'] {
+  cursor: progress;
+}
+
+[aria-disabled='true'] {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Efeito de ripple para indicação de clique */
+.a11y-click-indicator {
+  position: relative;
+  overflow: hidden;
+}
+
+.a11y-click-indicator::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: radial-gradient(
+    circle,
+    rgba(var(--color-primary-rgb), 0.4) 10%,
+    transparent 10.01%
+  );
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10);
+  opacity: 0;
+  top: 0;
+  left: 0;
+  transition: transform 0.3s, opacity 0.5s;
+}
+
+.a11y-click-indicator:active::after {
+  transform: scale(0);
+  opacity: 0.3;
+  transition: 0s;
+}

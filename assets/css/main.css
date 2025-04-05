@@ -14,6 +14,7 @@
 /* Layout */
 @import url('./modules/layout/container.css');
 @import url('./modules/layout/header.css');
+@import url('./modules/layout/hero.css');
 @import url('./modules/layout/section.css');
 @import url('./modules/layout/footer.css');
 

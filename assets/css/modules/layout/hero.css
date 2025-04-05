@@ -1,0 +1,319 @@
+/*
+ * Estilos para Hero Section
+ * Banner principal e seções de destaque
+ */
+
+/* Hero básico */
+.hero {
+  position: relative;
+  padding: var(--space-xl) 0;
+  overflow: hidden;
+}
+
+/* Variantes de background */
+.hero.bg-light {
+  background-color: var(--color-background-alt);
+}
+
+.hero.bg-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-on-primary);
+}
+
+.hero.bg-secondary {
+  background-color: var(--color-secondary);
+  color: var(--color-text-on-secondary);
+}
+
+/* Ajuste de padding */
+.hero.py-5 {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+.hero.py-6 {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+/* Títulos e texto */
+.hero .display-4 {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--space-md);
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+.hero .fw-bold {
+  font-weight: var(--font-weight-bold) !important;
+}
+
+.hero .lead {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-lg);
+  line-height: var(--line-height-loose);
+  color: var(--color-text-secondary);
+}
+
+/* Container para botões */
+.hero .d-grid {
+  display: grid;
+  gap: var(--space-sm);
+}
+
+.hero .d-md-flex {
+  display: flex;
+}
+
+.hero .gap-2 {
+  gap: 0.5rem;
+}
+
+.hero .justify-content-md-start {
+  justify-content: flex-start;
+}
+
+/* Botões */
+.hero .btn-lg {
+  font-weight: var(--font-weight-medium);
+}
+
+.hero .px-4 {
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.hero .me-md-2 {
+  margin-right: 0.5rem;
+}
+
+/* Imagem do hero */
+.hero .img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.hero .rounded {
+  border-radius: var(--border-radius-md);
+}
+
+.hero .shadow-lg {
+  box-shadow: var(--shadow-lg);
+}
+
+/* Alinhamento na coluna */
+.hero .row.align-items-center {
+  display: flex;
+  align-items: center;
+}
+
+.hero .col-lg-6 {
+  width: 100%;
+  padding-left: var(--space-md);
+  padding-right: var(--space-md);
+}
+
+/* Hero com imagem de fundo */
+.hero-bg-image {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Hero com overlay para melhor contraste */
+.hero-overlay::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+  z-index: 1;
+}
+
+.hero-overlay .container {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-overlay .display-4,
+.hero-overlay .lead {
+  color: var(--color-white);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Animação para elementos do hero */
+.hero-animate .display-4 {
+  animation: fadeInDown 0.8s both;
+  animation-delay: 0.2s;
+}
+
+.hero-animate .lead {
+  animation: fadeInDown 0.8s both;
+  animation-delay: 0.4s;
+}
+
+.hero-animate .d-grid {
+  animation: fadeInUp 0.8s both;
+  animation-delay: 0.6s;
+}
+
+.hero-animate .img-fluid {
+  animation: fadeIn 1s both;
+  animation-delay: 0.8s;
+}
+
+/* Shapes decorativos */
+.hero-shape-bottom {
+  position: relative;
+}
+
+.hero-shape-bottom::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M1200 120L0 16.48 0 0 1200 0 1200 120z' fill='%23ffffff'%3E%3C/path%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+.hero-shape-waves {
+  position: relative;
+}
+
+.hero-shape-waves::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 70px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23ffffff'%3E%3C/path%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+/* Responsividade */
+@media (min-width: 992px) {
+  .hero .col-lg-6 {
+    width: 50%;
+  }
+
+  .hero .row {
+    margin-left: -15px;
+    margin-right: -15px;
+  }
+
+  .hero .display-4 {
+    font-size: var(--font-size-4xl);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .hero {
+    padding: var(--space-lg) 0;
+  }
+
+  .hero .display-4 {
+    font-size: var(--font-size-3xl);
+  }
+
+  .hero .lead {
+    font-size: var(--font-size-md);
+  }
+
+  .hero .col-lg-6:last-child {
+    margin-top: var(--space-lg);
+  }
+}
+
+@media (max-width: 767.98px) {
+  .hero .d-md-flex {
+    display: grid;
+  }
+
+  .hero .me-md-2 {
+    margin-right: 0;
+  }
+
+  .hero .display-4 {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+@media (max-width: 575.98px) {
+  .hero {
+    padding: var(--space-md) 0;
+  }
+
+  .hero .btn-lg {
+    width: 100%;
+  }
+}
+
+/* Modo escuro */
+.dark-mode .hero.bg-light {
+  background-color: var(--color-background-alt);
+}
+
+.dark-mode .hero .display-4 {
+  color: var(--color-text-primary);
+}
+
+.dark-mode .hero .lead {
+  color: var(--color-text-secondary);
+}
+
+.dark-mode .hero-shape-bottom::after,
+.dark-mode .hero-shape-waves::after {
+  filter: brightness(0.2);
+}
+
+/* Variações de altura */
+.hero-sm {
+  min-height: 40vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-md {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-lg {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-fullscreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+/* Versão centro-centralizada */
+.hero-center {
+  text-align: center;
+}
+
+.hero-center .row {
+  justify-content: center;
+}
+
+.hero-center .d-grid {
+  justify-content: center;
+}
+
+/* Versão com imagem de fundo */
+.hero-bg-img {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}

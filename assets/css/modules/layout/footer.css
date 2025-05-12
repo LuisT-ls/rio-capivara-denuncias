@@ -1,276 +1,310 @@
-/*
- * Estilos do Rodapé
- * Rodapé principal do site com links, informações de contato e copyright
+/* 
+ * Footer Styles - Rio Capivara Denúncias
+ * assets/css/modules/layout/footer.css
  */
 
+/* Estrutura principal do footer */
 footer {
-  background-color: var(--color-background-alt);
-  color: var(--color-text-primary);
-  padding-top: var(--space-xl);
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-dark) 0%,
+    #003a31 100%
+  );
+  color: var(--color-white);
+  padding: var(--space-xl) 0 var(--space-md);
   position: relative;
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
   overflow: hidden;
 }
 
-/* Footer escuro */
-footer.bg-dark {
-  background-color: #212121;
-  color: rgba(255, 255, 255, 0.8);
+/* Efeito de onda decorativa no topo do footer */
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(
+    90deg,
+    var(--color-info) 0%,
+    var(--color-primary) 25%,
+    var(--color-secondary) 50%,
+    var(--color-primary) 75%,
+    var(--color-info) 100%
+  );
+  z-index: 1;
 }
 
-footer.bg-dark h5 {
-  color: var(--color-white);
-}
-
-footer.bg-dark hr {
-  border-color: rgba(255, 255, 255, 0.1);
-}
-
-footer.bg-dark a {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-footer.bg-dark a:hover {
-  color: var(--color-white);
-}
-
-/* Footer primário */
-footer.bg-primary {
-  background-color: var(--color-primary-dark);
-  color: rgba(255, 255, 255, 0.8);
-}
-
-footer.bg-primary h5 {
-  color: var(--color-white);
-}
-
-footer.bg-primary hr {
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
-footer.bg-primary a {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-footer.bg-primary a:hover {
-  color: var(--color-white);
-}
-
-/* Cabeçalhos de seção no rodapé */
+/* Títulos das seções do footer */
 footer h5 {
-  font-size: var(--font-size-md);
-  font-weight: var(--font-weight-bold);
+  color: var(--color-white);
+  font-family: var(--font-family-heading);
+  font-weight: var(--font-weight-semibold);
   margin-bottom: var(--space-md);
   position: relative;
+  padding-bottom: var(--space-sm);
   display: inline-block;
 }
 
+/* Linha decorativa após títulos */
 footer h5::after {
   content: '';
   position: absolute;
-  bottom: -8px;
   left: 0;
-  width: 30px;
-  height: 2px;
-  background-color: var(--color-primary);
+  bottom: 0;
+  width: 50px;
+  height: 3px;
+  background-color: var(--color-secondary);
   border-radius: var(--border-radius-pill);
+  transition: width var(--transition-normal);
 }
 
-/* Links no rodapé */
+/* Efeito hover na linha decorativa */
+footer h5:hover::after {
+  width: 100%;
+}
+
+/* Parágrafos no footer */
+footer p {
+  margin-bottom: var(--space-md);
+  line-height: var(--line-height-normal);
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: var(--font-weight-normal);
+}
+
+/* Links no footer */
 footer a {
-  color: var(--color-text-primary);
+  color: rgba(255, 255, 255, 0.8);
   text-decoration: none;
-  transition: color var(--transition-fast);
-  display: inline-block;
+  transition: all var(--transition-fast);
+  position: relative;
 }
 
+/* Efeito hover nos links */
 footer a:hover {
-  color: var(--color-primary);
-  transform: translateX(3px);
+  color: var(--color-white);
+  text-decoration: none;
+  transform: translateX(4px);
 }
 
-footer .text-white {
-  color: var(--color-white) !important;
+/* Sublinhado animado nos links */
+footer a::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1px;
+  bottom: -2px;
+  left: 0;
+  background-color: var(--color-secondary-light);
+  transition: width var(--transition-normal);
 }
 
-/* Lista no rodapé */
+footer a:hover::after {
+  width: 100%;
+}
+
+/* Lista de links no footer */
 footer ul {
   padding-left: 0;
-  list-style: none;
-  margin-bottom: var(--space-lg);
+  margin-bottom: var(--space-md);
 }
 
 footer ul li {
   margin-bottom: var(--space-sm);
+  display: flex;
+  align-items: center;
 }
 
-/* Ícones de mídia social */
-footer .social-links {
-  display: flex;
-  margin-top: var(--space-md);
+/* Espaçamento para ícones nos itens de lista */
+footer ul li i {
+  margin-right: var(--space-sm);
+  color: var(--color-secondary-light);
+  transition: transform var(--transition-fast);
 }
 
-footer .social-links a {
-  display: flex;
+/* Ícones de contato e redes sociais */
+footer .fab,
+footer .fas {
+  transition: transform var(--transition-fast), color var(--transition-fast);
+}
+
+/* Efeito hover nos ícones */
+footer ul li:hover i,
+footer a:hover i {
+  transform: scale(1.2);
+  color: var(--color-white);
+}
+
+/* Ícones de redes sociais */
+footer .social-icons a {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   width: 36px;
   height: 36px;
+  background-color: rgba(255, 255, 255, 0.1);
   border-radius: var(--border-radius-circle);
-  background-color: rgba(255, 255, 255, 0.1);
-  color: inherit;
   margin-right: var(--space-sm);
-  transition: all var(--transition-fast);
+  transition: all var(--transition-normal);
 }
 
-footer .social-links a:hover {
-  background-color: var(--color-primary);
-  color: var(--color-white);
-  transform: translateY(-3px);
+footer .social-icons a:hover {
+  background-color: var(--color-secondary);
+  transform: translateY(-4px);
 }
 
-/* Separador */
+footer .social-icons a:hover::after {
+  width: 0;
+}
+
+/* Seção de direitos autorais */
 footer hr {
-  margin-top: var(--space-lg);
-  margin-bottom: var(--space-md);
-  border-color: var(--color-border);
-  opacity: 0.3;
+  border-color: rgba(255, 255, 255, 0.1);
+  margin: var(--space-lg) 0;
 }
 
-/* Seção de copyright */
 footer .copyright {
-  padding: var(--space-md) 0;
+  text-align: center;
   font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.6);
 }
 
-/* Links de navegação inferior */
-footer .footer-nav {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  margin-top: var(--space-sm);
-}
-
-footer .footer-nav a {
-  margin: 0 var(--space-sm);
-  font-size: var(--font-size-sm);
-}
-
-/* Forma de wave no topo do footer */
-footer .footer-wave {
-  position: absolute;
-  top: -50px;
-  left: 0;
-  width: 100%;
-  height: 50px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z' fill='%23212121'/%3E%3C/svg%3E");
-  background-size: cover;
-  background-repeat: no-repeat;
-  transform: rotate(180deg);
-}
-
-/* Informações de contato */
-.footer-contact-info li {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: var(--space-md);
-}
-
-.footer-contact-info li i {
-  margin-right: var(--space-sm);
-  color: var(--color-primary);
-  min-width: 16px;
-  margin-top: 3px;
-}
-
-/* Formulário de newsletter no rodapé */
-.footer-newsletter {
-  margin-bottom: var(--space-lg);
-}
-
-.footer-newsletter p {
-  margin-bottom: var(--space-md);
-}
-
-.newsletter-form {
-  display: flex;
-}
-
-.newsletter-form input {
-  flex: 1;
-  padding: var(--space-sm) var(--space-md);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-md) 0 0 var(--border-radius-md);
-  background-color: rgba(255, 255, 255, 0.1);
-  color: inherit;
-}
-
-.newsletter-form button {
-  padding: var(--space-sm) var(--space-md);
-  background-color: var(--color-primary);
+/* Efeito destacado no ano do copyright */
+footer time {
   color: var(--color-white);
-  border: none;
-  border-radius: 0 var(--border-radius-md) var(--border-radius-md) 0;
+  font-weight: var(--font-weight-medium);
 }
 
-/* Logo no rodapé */
-.footer-logo {
-  display: block;
-  margin-bottom: var(--space-md);
+/* Estilizações especiais para o contêiner do footer */
+footer .container {
+  position: relative;
 }
 
-.footer-logo img {
-  max-height: 60px;
+/* Resposta ao modo escuro */
+.dark-mode footer {
+  background: linear-gradient(135deg, #001f1a 0%, #001a16 100%);
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Responsividade */
-@media (max-width: 768px) {
+.dark-mode footer::before {
+  opacity: 0.8;
+}
+
+.dark-mode footer a,
+.dark-mode footer p {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.dark-mode footer a:hover {
+  color: var(--color-secondary-light);
+}
+
+.dark-mode footer .social-icons a {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.dark-mode footer .social-icons a:hover {
+  background-color: var(--color-secondary-dark);
+}
+
+/* Classes utilitárias para ícones de redes sociais */
+footer .fa-facebook:hover {
+  color: #4267b2;
+}
+
+footer .fa-instagram:hover {
+  color: #e1306c;
+}
+
+footer .fa-twitter:hover {
+  color: #1da1f2;
+}
+
+footer .fa-github:hover {
+  color: #f5f5f5;
+}
+
+/* Adaptações para dispositivos móveis */
+@media (max-width: var(--breakpoint-md)) {
   footer {
-    padding-top: var(--space-lg);
+    padding: var(--space-lg) 0 var(--space-md);
   }
 
-  footer .col-md-4,
-  footer .col-lg-4 {
+  footer .row > div {
     margin-bottom: var(--space-lg);
   }
 
-  .newsletter-form {
-    flex-direction: column;
-  }
-
-  .newsletter-form input {
-    border-radius: var(--border-radius-md);
+  footer h5 {
     margin-bottom: var(--space-sm);
   }
 
-  .newsletter-form button {
-    border-radius: var(--border-radius-md);
+  footer .social-icons {
+    text-align: center;
+    margin-top: var(--space-sm);
   }
 
-  footer .social-links {
-    justify-content: center;
-  }
-
-  footer .text-center,
-  footer .text-right {
-    text-align: center !important;
+  footer .social-icons a {
+    margin: 0 var(--space-xs);
   }
 }
 
-/* Modo escuro */
-.dark-mode footer:not(.bg-dark):not(.bg-primary) {
-  background-color: var(--color-background-alt);
-  color: var(--color-text-primary);
+/* Pequeno toque de design responsivo para o rodapé */
+@media (min-width: var(--breakpoint-lg)) {
+  footer::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.03) 0%,
+      rgba(255, 255, 255, 0) 70%
+    );
+    pointer-events: none;
+  }
+
+  /* Pequena animação de brilho no canto */
+  @keyframes footerGlow {
+    0% {
+      opacity: 0.3;
+    }
+    50% {
+      opacity: 0.7;
+    }
+    100% {
+      opacity: 0.3;
+    }
+  }
+
+  footer::before {
+    animation: footerGlow 4s infinite;
+  }
 }
 
-.dark-mode footer:not(.bg-dark):not(.bg-primary) a {
-  color: var(--color-text-primary);
+/* Classe adicional para a lista de redes sociais */
+footer .social-links {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
 }
 
-.dark-mode footer:not(.bg-dark):not(.bg-primary) a:hover {
-  color: var(--color-primary);
+/* Efeito flutuante para ícones no hover */
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+  100% {
+    transform: translateY(0);
+  }
 }
 
-.dark-mode .footer-wave {
-  filter: brightness(0.2);
+footer .social-links a:hover i {
+  animation: float 1s ease-in-out infinite;
 }
